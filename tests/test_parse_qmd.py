@@ -12,7 +12,7 @@ class TestParseQmd(unittest.TestCase):
 
         try:
             result = parse_qmd(tmp_path)
-            self.assertIn("Hello, World!", result['code_blocks'])
+            self.assertIn('python\nprint("Hello, World!")\n', result['code_blocks'])
             # Additional assertions
         finally:
             # Clean up the temporary file
