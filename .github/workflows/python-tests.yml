@@ -18,6 +18,6 @@ jobs:
         pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Install QuartoQuest Package
-      run: pip install -e .
+      run: cd quartoquest && pip install -e .
     - name: Run tests
       run: pytest tests/
