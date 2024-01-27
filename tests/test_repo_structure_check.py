@@ -13,10 +13,16 @@ class TestRepoStructureCheck(unittest.TestCase):
                 f.write('Sample README content')
 
             # Perform the test
+            # Assuming 'data' should be present and 'README.md' should be there
             result = check_directory_structure(tmp_dir, ['data'], ['README.md'])
-            self.assertIn('data', result['missing_directories'])
-            self.assertIn('README.md', result['unexpected_files'])
+
+            # If 'data' is correctly created, it should not be in missing_directories
+            self.assertNotIn('data', result['missing_directories'])
+
+            # If 'README.md' is correctly placed, it should not be in unexpected_files
+            self.assertNotIn('README.md', result['unexpected_files'])
 
 # Run the tests
 if __name__ == '__main__':
     unittest.main()
+

@@ -31,7 +31,8 @@ class TestMarkdownReport(unittest.TestCase):
         self.assertIn("Complex but manageable structure.", report)
         self.assertIn("## Repository Structure Check", report)
         self.assertIn("- **Missing Directories**: ", report)
-        self.assertIn("unexpected_files: []", report)
+        self.assertIn("- **Unexpected Files**: ", report)
+
 
 # Run the tests
 if __name__ == '__main__':
