@@ -1,5 +1,5 @@
 import unittest
-from quartoquest.generate_markdown_report import generate_markdown_report
+from quartoquest import generate_markdown_report
 
 class TestMarkdownReport(unittest.TestCase):
     def test_report_generation(self):
