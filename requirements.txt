@@ -2,4 +2,4 @@ markdown
 flake8
 pylint 
 pandoc
-gitpython
+GitPython
