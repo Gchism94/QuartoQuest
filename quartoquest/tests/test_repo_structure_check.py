@@ -1,5 +1,5 @@
 import unittest
-from quartoquest import check_directory_structure
+import check_directory_structure
 
 class TestRepoStructureCheck(unittest.TestCase):
     def test_structure_check(self):
