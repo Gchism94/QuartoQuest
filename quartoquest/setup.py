@@ -5,6 +5,7 @@ setup(
     version='0.1.0',  # Replace with your version
     packages=find_packages(),
     install_requires=[
-        # List dependencies here
+    "radon",
+    "GitPython"
     ],
 )
