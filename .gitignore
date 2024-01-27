@@ -1,0 +1,10 @@
+# Egg-info directory
+*.egg-info/
+
+# Dist-info directory
+*.dist-info/
+
+# Other common folders to ignore
+__pycache__/
+*.pyc
+.DS_Store  # for macOS users
