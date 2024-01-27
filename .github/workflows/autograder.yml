@@ -23,7 +23,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: rendered-html
-          path: *.html
+          path: '**/*.html'
 
   run-other-autograder-tasks:
     runs-on: ubuntu-latest
@@ -33,4 +33,4 @@ jobs:
         with:
           python-version: '3.8'
       - run: pip install -r requirements.txt
-      - run: python autograder.py  # Assuming autograder.py handles other tasks
+      - run: python autograder.py
