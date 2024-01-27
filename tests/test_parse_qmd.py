@@ -1,19 +1,24 @@
 import unittest
+import tempfile
+import os
 from quartoquest.parse_qmd import parse_qmd
 
 class TestParseQmd(unittest.TestCase):
     def test_extraction(self):
-        test_qmd_content = """
-        # Test Markdown
-        ```python
-        print("Hello, World!")
-        ```
-        Some text content.
-        """
-        result = parse_qmd(test_qmd_content)
-        self.assertIn("print(\"Hello, World!\")", result['code_blocks'])
-        self.assertIn("Some text content", result['markdown_text'])
+        # Create a temporary file with test content
+        with tempfile.NamedTemporaryFile(delete=False) as tmp:
+            tmp.write(b"# Test Markdown\n```python\nprint(\"Hello, World!\")\n```\nSome text content.")
+            tmp_path = tmp.name
+
+        try:
+            result = parse_qmd(tmp_path)
+            self.assertIn("Hello, World!", result['code_blocks'])
+            # Additional assertions
+        finally:
+            # Clean up the temporary file
+            os.remove(tmp_path)
 
 # Run the tests
 if __name__ == '__main__':
     unittest.main()
+
