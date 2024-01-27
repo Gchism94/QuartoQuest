@@ -1,16 +1,36 @@
 name: QMD Autograder
 on: [push]
 jobs:
-  run-autograder:
+  check-repository-structure:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out code
-        uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
         with:
           python-version: '3.8'
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-      - name: Run autograder
-        run: python autograder.py
+      - run: pip install -r requirements.txt
+      - run: python repo_structure_check.py
+
+  render-qmd:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - run: pip install -r requirements.txt
+      - run: python render_qmd.py
+      - uses: actions/upload-artifact@v2
+        with:
+          name: rendered-html
+          path: *.html
+
+  run-other-autograder-tasks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - run: pip install -r requirements.txt
+      - run: python autograder.py  # Assuming autograder.py handles other tasks
