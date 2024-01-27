@@ -19,4 +19,4 @@ jobs:
           pip install -r requirements.txt  # Install from requirements.txt unconditionally
           pip install -e ./quartoquest  # Install QuartoQuest in editable mode
       - name: Run tests
-        run: pytest tests/
+        run: pytest quartoquest/tests/
