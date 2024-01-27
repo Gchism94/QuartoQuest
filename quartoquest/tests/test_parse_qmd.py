@@ -1,5 +1,5 @@
 import unittest
-import parse_qmd
+from quartoquest import parse_qmd
 
 class TestParseQmd(unittest.TestCase):
     def test_extraction(self):
