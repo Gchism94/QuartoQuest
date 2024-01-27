@@ -20,3 +20,4 @@ jobs:
           pip install -e ./quartoquest # Install QuartoQuest in editable mode
       - name: Run tests
         run: pytest
+        working-directory: quartoquest
