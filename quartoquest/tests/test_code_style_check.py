@@ -1,5 +1,5 @@
 import unittest
-from quartoquest import check_code_style
+from quartoquest.code_style_check import check_code_style
 
 class TestCodeStyleCheck(unittest.TestCase):
     def test_linting(self):
