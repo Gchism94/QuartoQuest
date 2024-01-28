@@ -5,11 +5,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
         with:
           python-version: '3.8'
-      - run: pip install -r requirements.txt
-      - run: python repo_structure_check.py
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run repository structure check
+        run: python quartoquest/repo_structure_check.py
 
   render-qmd:
     runs-on: ubuntu-latest
