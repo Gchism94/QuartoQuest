@@ -12,7 +12,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Run repository structure check
-        run: python quartoquest/repo_structure_check.py
+        run: pip install -e .  # Install your package in editable mode
+      - run: python quartoquest/repo_structure_check.py  # Run the repo structure check
 
   render-qmd:
     runs-on: ubuntu-latest
