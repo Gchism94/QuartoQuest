@@ -5,3 +5,5 @@ pandoc
 GitPython
 radon
 pytest
+jupyter
+nbformat
