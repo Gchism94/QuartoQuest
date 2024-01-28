@@ -1,6 +1,8 @@
 ---
 title: "Demo Document"
-format: html
+format: 
+  html:
+    embed-resources: true
 ---
 
 # Heading
