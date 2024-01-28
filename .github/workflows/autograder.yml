@@ -13,7 +13,7 @@ jobs:
       - run: |
           cd quartoquest
           pip install -e .
-      - run: python repo_structure_check.py
+      - run: python quartoquest/repo_structure_check.py
 
   render-qmd:
     runs-on: ubuntu-latest
@@ -27,7 +27,7 @@ jobs:
           cd quartoquest
           pip install -e .
       - run: pip install -r requirements.txt
-      - run: python render_qmd.py
+      - run: python quartoquest/render_qmd.py
       - uses: actions/upload-artifact@v2
         with:
           name: rendered-html
@@ -45,4 +45,4 @@ jobs:
       - run: |
           cd quartoquest
           pip install -e .
-      - run: python autograder.py
+      - run: python quartoquest/autograder.py
