@@ -27,9 +27,9 @@ jobs:
           sudo dpkg -i quarto.deb
           python -m pip install --upgrade pip
       - run: pip install -r requirements.txt
-      - name: Find .qmd file and render to HTML
+      - name: Find .qmd file in docs and render to HTML
         run: |
-          qmd_file=$(find . -name "*.qmd" -print -quit)
+          qmd_file=$(find docs -name "*.qmd" -print -quit)
           if [[ -n "$qmd_file" ]]; then
             quarto render "$qmd_file"
             html_file="${qmd_file%.*}.html"
@@ -40,7 +40,7 @@ jobs:
               exit 1
             fi
           else
-            echo "No .qmd file found"
+            echo "No .qmd file found in docs"
             exit 1
           fi
       - uses: actions/upload-artifact@v2
