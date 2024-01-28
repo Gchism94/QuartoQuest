@@ -5,15 +5,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - uses: actions/setup-python@v2
         with:
           python-version: '3.8'
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-      - name: Run repository structure check
-        run: pip install -e .  # Install your package in editable mode
-      - run: python quartoquest/repo_structure_check.py  # Run the repo structure check
+      - run: pip install --upgrade pip
+      - run: pip install -r requirements.txt
+      - run: |
+          cd quartoquest
+          pip install -e .
+      - run: python repo_structure_check.py
 
   render-qmd:
     runs-on: ubuntu-latest
@@ -22,7 +22,10 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.8'
-      - run: pip install .
+      - run: pip install --upgrade pip
+      - run: |
+          cd quartoquest
+          pip install -e .
       - run: pip install -r requirements.txt
       - run: python render_qmd.py
       - uses: actions/upload-artifact@v2
@@ -37,5 +40,9 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.8'
+      - run: pip install --upgrade pip
       - run: pip install -r requirements.txt
+      - run: |
+          cd quartoquest
+          pip install -e .
       - run: python autograder.py
