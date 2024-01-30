@@ -3,8 +3,11 @@ import os
 import repo_structure_check
 
 def main():
+    # Set the repository path. In Docker, this should be the container's working directory.
+    repo_path = os.getcwd()
+
     # Use the GITHUB_WORKSPACE environment variable if available, otherwise use the current directory
-    repo_path = os.getenv('GITHUB_WORKSPACE', '.')
+    #repo_path = os.getenv('GITHUB_WORKSPACE', '.')
 
     # 1. Check Repository Structure
     repo_structure_results = repo_structure_check.check_directory_structure(
