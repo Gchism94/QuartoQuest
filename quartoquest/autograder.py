@@ -2,6 +2,11 @@
 import os
 import repo_structure_check
 
+def save_report_to_file(report, file_path):
+    """Save the final report to a file."""
+    with open(file_path, 'w') as file:
+        file.write(report)
+        
 def main():
     # Set the repository path. In Docker, this should be the container's working directory.
     repo_path = os.getcwd()
@@ -21,6 +26,10 @@ def main():
     # Compile all results into a final report
     final_report = compile_report(repo_structure_results)
     print(final_report)
+
+    # Save the report to a file
+    report_file_path = os.path.join(repo_path, 'final_report.txt')
+    save_report_to_file(final_report, report_file_path)
 
 def compile_report(*args):
     # Implement logic to compile the results of various checks into a final report
