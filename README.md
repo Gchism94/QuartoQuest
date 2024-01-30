@@ -1,5 +1,7 @@
 # quartoquest: The Concise .qmd Autograder
 
+**Disclosure**: This package is in development and it not production ready. Consider this an alpha testing phase project.
+
 ## Overview
 **quartoquest** is a powerful and efficient autograder designed to enhance the quality of `.qmd` (Quarto Markdown) files. Integrated with GitHub Actions, it automates the evaluation process for coding projects, focusing on code style, organization, commit clarity, and repository structure. It's an ideal tool for educators and teams seeking to ensure high standards in coding and documentation.
 
