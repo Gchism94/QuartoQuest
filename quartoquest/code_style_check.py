@@ -13,7 +13,7 @@ def lint_code(code_block):
     result = subprocess.run(['flake8', 'temp_code.py'], capture_output=True, text=True)
 
     # Return the linting output
-    return result.stdout
+    return result.stdout if result.returncode == 0 else result.stderr
 
 def check_code_style(code_blocks):
     """
