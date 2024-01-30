@@ -1,14 +1,23 @@
-# Use an official Python runtime as a parent image
+# Use a Python base image
 FROM python:3.8-slim
 
+# Install wget and other necessary tools
+RUN apt-get update && apt-get install -y wget
+
+# Install Quarto
+RUN wget -q -O quarto.deb https://github.com/quarto-dev/quarto-cli/releases/download/v1.1.189/quarto-1.1.189-linux-amd64.deb
+RUN dpkg -i quarto.deb
+
 # Set the working directory in the container
-WORKDIR /usr/src/app
+WORKDIR /autograder
 
-# Copy the current directory contents into the container at /usr/src/app
-COPY . /usr/src/app
+# Copy the necessary files into the container
+COPY . /autograder
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Python dependencies
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+RUN pip install -e .
 
-# Run repo_structure_check.py when the container launches
-CMD ["python", "./quartoquest/repo_structure_check.py"]
+# Command to run on container start
+CMD ["python", "quartoquest/autograder.py"]
