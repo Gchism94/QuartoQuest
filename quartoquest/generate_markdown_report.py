@@ -55,3 +55,7 @@ if __name__ == "__main__":
     # Assuming other_reports is a dictionary of other check results
     markdown_report = generate_markdown_report(sample_quality_reports, sample_repo_structure_results)
     print(markdown_report)
+    
+    # Define the path for the markdown report file
+    report_file_path = "/autograder/autograder_report.md"
+    save_markdown_report(markdown_report, report_file_path)
