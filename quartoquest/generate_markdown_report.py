@@ -36,7 +36,7 @@ def generate_markdown_report(quality_reports, repo_structure_results, other_repo
     report_md += "- **Unexpected Files**: " + ", ".join(repo_structure_results['unexpected_files']) + "\n\n"
 
     # Add Code Quality Reports
-    report_qmd += "## Code Quality Checks\n"
+    report_md += "## Code Quality Checks\n"
     for block_id, report in quality_reports.items():
         report_md += f"#### {block_id}\n"
         report_md += format_complexity_report(report['Complexity']) + "\n"
