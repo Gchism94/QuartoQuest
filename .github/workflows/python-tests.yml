@@ -16,10 +16,8 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install -r requirements.txt
       - name: Install the package
         run: |
-          cd quartoquest
           pip install -e .
       - name: Run tests with unittest
         run: python -m unittest discover tests
