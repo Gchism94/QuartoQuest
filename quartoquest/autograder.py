@@ -1,5 +1,5 @@
 import os
-import repo_structure_check
+from . import repo_structure_check
 # Import other necessary modules or scripts
 
 def main():
