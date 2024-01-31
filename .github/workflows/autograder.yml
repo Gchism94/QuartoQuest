@@ -11,7 +11,7 @@ jobs:
           python-version: '3.8'
       - run: pip install --upgrade pip
       - run: pip install -e .
-      - run: python quartoquest/repo_structure_check.py
+      - run: python -m quartoquest.repo_structure_check
 
   render-qmd:
     runs-on: ubuntu-latest
@@ -53,4 +53,4 @@ jobs:
           python-version: '3.8'
       - run: pip install --upgrade pip
       - run: pip install -e .
-      - run: python quartoquest/autograder.py
+      - run: python -m quartoquest.autograder
