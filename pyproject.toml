@@ -16,17 +16,17 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 keywords = ["education", "autograder", "quarto", "markdown"]
-
-[project.dependencies]
-radon = "^6.0.1"
-GitPython = "^3.1.41"
-markdown = "^3.5.2"
-flake8 = "^7.0.0"
-pylint = "^3.0.3"
-pandoc = "^2.3"
-pytest = "^8.0.0"
-jupyter = "^1.0.0"
-nbformat = "^5.9.2"
+dependencies = [
+    radon = "^6.0.1",
+    GitPython = "^3.1.41",
+    markdown = "^3.5.2",
+    flake8 = "^7.0.0",
+    pylint = "^3.0.3",
+    pandoc = "^2.3",
+    pytest = "^8.0.0",
+    jupyter = "^1.0.0",
+    nbformat = "^5.9.2"
+    ]
 
 [project.urls]
 Home = "https://github.com/Gchism94/quartoquest"
