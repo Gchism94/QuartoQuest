@@ -3,11 +3,10 @@ yaml_header = """
 title: "Autograder Report"
 author: "Autograder System"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-output:
-  html_document:
+format:
+  html:
     theme: lux
     toc: true
-    toc_depth: 3
 ---
 """
 
