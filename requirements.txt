@@ -1,9 +1,0 @@
-markdown
-flake8
-pylint 
-pandoc
-GitPython
-radon
-pytest
-jupyter
-nbformat
