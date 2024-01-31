@@ -10,7 +10,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'quartoquest-autograder = quartoquest.autograder:main',
+            'autograder = quartoquest.autograder:main',
         ],
     },
 )
