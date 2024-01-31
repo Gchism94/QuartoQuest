@@ -1,10 +1,16 @@
 import os
+import glob
 from . import repo_structure_check
 from . import code_quality_check
 from . import code_style_check
 from . import commit_analysis
 from . import parse_qmd
 from .generate_markdown_report import generate_quarto_report, save_quarto_report
+
+def find_first_qmd_file(repo_path):
+    """Finds the first .qmd file in the given directory."""
+    qmd_files = glob.glob(os.path.join(repo_path, '*.qmd'))
+    return qmd_files[0] if qmd_files else None
 
 def main():
     repo_path = os.getenv('GITHUB_WORKSPACE', '.')
@@ -28,8 +34,8 @@ def main():
     print("Commit Analysis Results:", commit_analysis_results)
 
     # 4. Parse QMD File
-    qmd_file_path = '/path/to/qmd/file'  # Replace with actual file path
-    parsed_qmd = parse_qmd.parse_qmd(qmd_file_path)
+    qmd_file_path = find_first_qmd_file(repo_path)
+    parsed_qmd = parse_qmd.parse_qmd(qmd_file_path) if qmd_file_path else None
     print("Parsed QMD Content:", parsed_qmd)
 
     # Compile all results into a final Quarto report
