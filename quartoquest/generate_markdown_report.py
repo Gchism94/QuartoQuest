@@ -1,3 +1,16 @@
+yaml_header = """
+---
+title: "Autograder Report"
+author: "Autograder System"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    theme: lux
+    toc: true
+    toc_depth: 3
+---
+"""
+
 def format_complexity_report(complexity_report):
     """
     Formats the complexity report into a markdown string.
@@ -14,33 +27,34 @@ def format_structure_report(structure_report):
     # This is an example and will vary based on your structure assessment
     return f"### Structure Report\n- {structure_report}\n"
 
-def generate_markdown_report(quality_reports, repo_structure_results, other_reports=None):
+def generate_quarto_report(quality_reports, repo_structure_results, other_reports=None):
     """
-    Generates a comprehensive markdown report from various checks.
+    Generates a comprehensive Quarto (.qmd) report from various checks.
     """
-    report_md = "# Autograder Report\n\n"
+    report_qmd = yaml_header
+    report_qmd += "# Introduction\n\nThis report presents the results of the autograding process...\n\n"
 
     # Add Repository Structure Check Results
-    report_md += "## Repository Structure Check\n"
-    report_md += "- **Missing Directories**: " + ", ".join(repo_structure_results['missing_directories']) + "\n"
-    report_md += "- **Unexpected Files**: " + ", ".join(repo_structure_results['unexpected_files']) + "\n\n"
+    report_qmd += "## Repository Structure Check\n"
+    report_qmd += "- **Missing Directories**: " + ", ".join(repo_structure_results['missing_directories']) + "\n"
+    report_qmd += "- **Unexpected Files**: " + ", ".join(repo_structure_results['unexpected_files']) + "\n\n"
 
     # Add Code Quality Reports
-    report_md += "## Code Quality Checks\n"
+    report_qmd += "## Code Quality Checks\n"
     for block_id, report in quality_reports.items():
-        report_md += f"#### {block_id}\n"
-        report_md += format_complexity_report(report['Complexity']) + "\n"
-        report_md += format_structure_report(report['Structure']) + "\n"
+        report_qmd += f"#### {block_id}\n"
+        report_qmd += format_complexity_report(report['Complexity']) + "\n"
+        report_qmd += format_structure_report(report['Structure']) + "\n"
 
     # Add other reports if any
     if other_reports:
-        report_md += "## Other Checks\n"
+        report_qmd += "## Other Checks\n"
         # Format other reports (placeholder)
 
-    return report_md
+    return report_qmd
 
-def save_markdown_report(report_content, file_path):
-    """Saves the given Markdown report content to a file."""
+def save_quarto_report(report_content, file_path):
+    """Saves the given Quarto report content to a file."""
     with open(file_path, 'w', encoding='utf-8') as file:
         file.write(report_content)
 
@@ -58,8 +72,8 @@ if __name__ == "__main__":
         "unexpected_files": ["temp.txt"]
     }
     # Assuming other_reports is a dictionary of other check results
-    markdown_report = generate_markdown_report(sample_quality_reports, sample_repo_structure_results)
+    quarto_report = generate_quarto_report(sample_quality_reports, sample_repo_structure_results)
 
-    report_file_path = "/autograder/autograder_report.md"
-    save_markdown_report(markdown_report, report_file_path)
+    report_file_path = "/autograder/autograder_report.qmd"
+    save_quarto_report(quarto_report, report_file_path)
 

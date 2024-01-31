@@ -1,27 +1,51 @@
 import os
 from . import repo_structure_check
-# Import other necessary modules or scripts
+from . import code_quality_check
+from . import code_style_check
+from . import commit_analysis
+from . import parse_qmd
+from .generate_markdown_report import generate_quarto_report, save_quarto_report
 
 def main():
     repo_path = os.getenv('GITHUB_WORKSPACE', '.')
 
+    # 1. Check Repository Structure
     repo_structure_results = repo_structure_check.check_directory_structure(
         repo_path, ['data'], ['README.md', '.gitignore', 'LICENSE', 'requirements.txt']
     )
     print("Repository Structure Check Results:", repo_structure_results)
 
-    final_report = compile_report(repo_structure_results)
-    print(final_report)
+    # 2. Code Quality and Style Checks
+    # Assuming you have a way to get code_blocks (list of strings)
+    code_blocks = []  # Replace with actual code blocks
+    code_quality_results = code_quality_check.assess_code_quality(code_blocks)
+    code_style_results = code_style_check.check_code_style(code_blocks)
+    print("Code Quality Results:", code_quality_results)
+    print("Code Style Results:", code_style_results)
 
-    # Write the final report to a file
-    with open('autograder_report.md', 'w') as file:
-        file.write(final_report)
+    # 3. Commit Analysis
+    commit_analysis_results = commit_analysis.analyze_commit_messages(repo_path)
+    print("Commit Analysis Results:", commit_analysis_results)
 
-def compile_report(*args):
-    report = "Autograder Final Report\n"
-    for result in args:
-        report += str(result) + "\n"
-    return report
+    # 4. Parse QMD File
+    qmd_file_path = '/path/to/qmd/file'  # Replace with actual file path
+    parsed_qmd = parse_qmd.parse_qmd(qmd_file_path)
+    print("Parsed QMD Content:", parsed_qmd)
+
+    # Compile all results into a final Quarto report
+    final_report = generate_quarto_report(
+        code_quality_results, 
+        repo_structure_results, 
+        {
+            "Code Style Results": code_style_results,
+            "Commit Analysis Results": commit_analysis_results,
+            "Parsed QMD Content": parsed_qmd
+        }
+    )
+
+    # Save the report as a .qmd file
+    report_file_path = 'autograder_report.qmd'
+    save_quarto_report(final_report, report_file_path)
 
 if __name__ == "__main__":
     main()
