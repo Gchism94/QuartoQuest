@@ -39,6 +39,11 @@ def generate_markdown_report(quality_reports, repo_structure_results, other_repo
 
     return report_md
 
+def save_markdown_report(report_content, file_path):
+    """Saves the given Markdown report content to a file."""
+    with open(file_path, 'w', encoding='utf-8') as file:
+        file.write(report_content)
+
 # Example usage
 if __name__ == "__main__":
     sample_quality_reports = {
@@ -54,8 +59,7 @@ if __name__ == "__main__":
     }
     # Assuming other_reports is a dictionary of other check results
     markdown_report = generate_markdown_report(sample_quality_reports, sample_repo_structure_results)
-    print(markdown_report)
-    
-    # Define the path for the markdown report file
+
     report_file_path = "/autograder/autograder_report.md"
     save_markdown_report(markdown_report, report_file_path)
+
