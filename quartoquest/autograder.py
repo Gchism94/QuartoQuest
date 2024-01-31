@@ -5,7 +5,7 @@ from . import code_quality_check
 from . import code_style_check
 from . import commit_analysis
 from . import parse_qmd
-from .generate_markdown_report import generate_quarto_report, save_quarto_report
+from .generate_markdown_report import generate_markdown_report, save_markdown_report
 
 def find_first_qmd_file(repo_path):
     """Finds the first .qmd file in the given directory."""
