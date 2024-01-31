@@ -56,7 +56,6 @@ jobs:
         with:
           python-version: '3.8'
       - run: pip install --upgrade pip
-      - run: pip install -r requirements.txt
       - run: |
           cd quartoquest
           pip install -e .
