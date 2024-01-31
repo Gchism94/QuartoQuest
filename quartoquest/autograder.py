@@ -38,10 +38,10 @@ def main():
     parsed_qmd = parse_qmd.parse_qmd(qmd_file_path) if qmd_file_path else None
     print("Parsed QMD Content:", parsed_qmd)
 
-    # Compile all results into a final Quarto report
-    final_report = generate_quarto_report(
-        code_quality_results, 
-        repo_structure_results, 
+    # Compile all results into a final Markdown report
+    final_report = generate_markdown_report(
+        code_quality_results,
+        repo_structure_results,
         {
             "Code Style Results": code_style_results,
             "Commit Analysis Results": commit_analysis_results,
@@ -49,9 +49,9 @@ def main():
         }
     )
 
-    # Save the report as a .qmd file
-    report_file_path = 'autograder_report.qmd'
-    save_quarto_report(final_report, report_file_path)
+    # Save the report as a .md file
+    report_file_path = 'autograder_report.md'  # Updated file extension
+    save_markdown_report(final_report, report_file_path)  # Updated function call
 
 if __name__ == "__main__":
     main()
