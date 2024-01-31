@@ -1,15 +1,3 @@
-yaml_header = """
----
-title: "Autograder Report"
-author: "Autograder System"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
-format:
-  html:
-    theme: lux
-    toc: true
----
-"""
-
 def format_complexity_report(complexity_report):
     """
     Formats the complexity report into a markdown string.
