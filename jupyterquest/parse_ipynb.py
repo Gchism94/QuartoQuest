@@ -5,17 +5,17 @@ import os
 def extract_code_cells(nb_content):
     """
     Extracts code cells from the Jupyter notebook content.
-    Returns a list of code cells.
+    Returns a list of strings, where each string represents the source code of a code cell.
     """
-    code_cells = [cell['source'] for cell in nb_content['cells'] if cell['cell_type'] == 'code']
+    code_cells = [''.join(cell['source']) for cell in nb_content['cells'] if cell['cell_type'] == 'code']
     return code_cells
 
 def extract_markdown_cells(nb_content):
     """
     Extracts markdown cells from the Jupyter notebook content.
-    Returns a list of markdown cells.
+    Returns a list of strings, where each string represents the content of a markdown cell.
     """
-    markdown_cells = [cell['source'] for cell in nb_content['cells'] if cell['cell_type'] == 'markdown']
+    markdown_cells = [''.join(cell['source']) for cell in nb_content['cells'] if cell['cell_type'] == 'markdown']
     return markdown_cells
 
 def parse_ipynb(file_path):
