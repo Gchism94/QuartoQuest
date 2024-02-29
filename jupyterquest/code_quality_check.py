@@ -6,6 +6,8 @@ def assess_code_complexity(code):
     Assesses the complexity of code using Radon.
     Returns a list of complexity metrics for each function/method in the code.
     """
+    if not isinstance(code, str):
+        return "Invalid input: Code must be a string"
     try:
         complexities = cc_visit(code)
         return [(item.name, item.complexity, cc_rank(item.complexity)) for item in complexities]
@@ -17,12 +19,12 @@ def assess_code_structure(code):
     Assess code structure using Python's ast module to parse code and analyze its structure.
     Returns an assessment result.
     """
+    if not isinstance(code, str):
+        return "Invalid input: Code must be a string"
     try:
         tree = ast.parse(code)
-        # Example structure assessment: Count the number of function definitions
         functions = [node for node in ast.walk(tree) if isinstance(node, ast.FunctionDef)]
         num_functions = len(functions)
-        # This is a basic check; you can add more sophisticated analysis here
         return f"Number of functions: {num_functions}"
     except SyntaxError as e:
         return f"Syntax error in code: {str(e)}"
@@ -33,6 +35,9 @@ def assess_code_quality(code_blocks):
     Returns a summary of code quality assessments.
     """
     quality_report = {}
+
+    if not all(isinstance(code, str) for code in code_blocks):
+        return {"Error": "All code blocks must be strings"}
 
     for i, code in enumerate(code_blocks, 1):
         complexity_report = assess_code_complexity(code)
