@@ -17,11 +17,11 @@ def generate_markdown_report(quality_reports, repo_structure_results, notebook_s
     """Generates a comprehensive Markdown (.md) report from various checks."""
     report_md = "# Introduction\n\nThis report presents the results of the autograding process for a Jupyter notebook...\n\n"
 
-    # Add Notebook Statistics (if applicable)
-    if notebook_stats:
-        report_md += "## Notebook Statistics\n"
+    # Include notebook stats if provided
+    if notebook_stats and 'total_code_cells' in notebook_stats:
         report_md += f"- **Total Code Cells**: {notebook_stats['total_code_cells']}\n"
-        report_md += f"- **Total Markdown Cells**: {notebook_stats['total_markdown_cells']}\n\n"
+    else:
+        report_md += "- **Total Code Cells**: Data not available\n"
 
     # Add Repository Structure Check Results
     report_md += "## Repository Structure Check\n"
