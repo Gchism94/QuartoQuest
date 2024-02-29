@@ -1,72 +1,90 @@
-def format_complexity_report(complexity_report):
-    """
-    Formats the complexity report into a markdown string.
-    """
-    report_md = "### Complexity Report\n"
-    for item in complexity_report:
-        report_md += f"- **Function/Method**: {item[0]}, **Complexity**: {item[1]}, **Rank**: {item[2]}\n"
-    return report_md
+import os
 
-def format_structure_report(structure_report):
+def generate_markdown_report(quality_reports, repo_structure_results, notebook_stats=None, other_reports=None, improvement_plan=None):
     """
-    Formats the structure report into a markdown string.
-    """
-    return f"### Structure Report\n- {structure_report}\n"
+    Generates a comprehensive Markdown report from various checks.
 
-def generate_markdown_report(quality_reports, repo_structure_results, notebook_stats=None, other_reports=None):
-    """Generates a comprehensive Markdown (.md) report from various checks."""
-    report_md = "# Introduction\n\nThis report presents the results of the autograding process for a Jupyter notebook...\n\n"
+    :param quality_reports: Dictionary of code quality reports.
+    :param repo_structure_results: Dictionary of repository structure results.
+    :param notebook_stats: Dictionary of notebook statistics.
+    :param other_reports: Dictionary of other reports (e.g., security, dependency checks).
+    :param improvement_plan: List of improvement actions.
+    :return: Markdown formatted report as a string.
+    """
+    report_md = "# Code Review Report\n\n"
+
+    # Summary Section
+    report_md += "## Summary\n\n"
+    report_md += "This report outlines the findings from the automated code review process. It highlights key areas for improvement and acknowledges best practices found within the codebase.\n\n"
 
     # Include notebook stats if provided
-    if notebook_stats and 'total_code_cells' in notebook_stats:
-        report_md += f"- **Total Code Cells**: {notebook_stats['total_code_cells']}\n"
-    else:
-        report_md += "- **Total Code Cells**: Data not available\n"
+    if notebook_stats:
+        report_md += f"- **Total Code Cells**: {notebook_stats.get('total_code_cells', 'N/A')}\n"
+        report_md += f"- **Total Markdown Cells**: {notebook_stats.get('total_markdown_cells', 'N/A')}\n\n"
 
-    # Add Repository Structure Check Results
-    report_md += "## Repository Structure Check\n"
-    report_md += "- **Missing Directories**: " + ", ".join(repo_structure_results['missing_directories']) + "\n"
-    report_md += "- **Unexpected Files**: " + ", ".join(repo_structure_results['unexpected_files']) + "\n\n"
+    # Repository Structure Check Results
+    report_md += "## Repository Structure Check\n\n"
+    report_md += "- **Missing Directories**: " + ", ".join(repo_structure_results.get('missing_directories', [])) + "\n"
+    report_md += "- **Unexpected Files**: " + ", ".join(repo_structure_results.get('unexpected_files', [])) + "\n\n"
 
-    # Add Code Quality Reports
-    report_md += "## Code Quality Checks\n"
+    # Code Quality Reports
+    report_md += "## Code Quality Checks\n\n"
     for block_id, report in quality_reports.items():
-        report_md += f"#### Cell {block_id}\n"
-        report_md += format_complexity_report(report['Complexity']) + "\n"
-        report_md += format_structure_report(report['Structure']) + "\n"
+        report_md += f"### Code Block {block_id}\n"
+        report_md += f"- **Complexity**: {report.get('Complexity', 'N/A')}\n"
+        report_md += f"- **Structure**: {report.get('Structure', 'N/A')}\n\n"
 
-    # Add other reports if any
+    # Other Reports
     if other_reports:
         for title, content in other_reports.items():
-            report_md += f"## {title}\n{content}\n"
+            report_md += f"## {title}\n\n{content}\n\n"
+
+    # Improvement Plan
+    if improvement_plan:
+        report_md += "## Improvement Plan\n\n"
+        for step in improvement_plan:
+            report_md += f"- {step}\n"
+        report_md += "\n"
+
+    # Additional Resources
+    report_md += "## Additional Resources\n\n"
+    report_md += "- [Python Official Documentation](https://docs.python.org/3/)\n"
+    report_md += "- [Effective Python: 90 Specific Ways to Write Better Python](https://effectivepython.com/)\n"
+    report_md += "- [Stack Overflow](https://stackoverflow.com/) for community support\n\n"
 
     return report_md
 
 def save_markdown_report(report_content, file_path):
     """Saves the given Markdown report content to a file."""
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)  # Ensure the directory exists
     with open(file_path, 'w', encoding='utf-8') as file:
         file.write(report_content)
 
 # Example usage
 if __name__ == "__main__":
+    # Mock data for demonstration
     sample_quality_reports = {
-        "Code Cell 1": {
-            "Complexity": [("example_function", 2, "B")],
-            "Structure": "Good structure and organization."
-        },
-        # ... other code cells
+        "Code Cell 1": {"Complexity": "Low", "Structure": "Good"},
     }
-    sample_repo_structure_results = {
-        "missing_directories": ["data"],
-        "unexpected_files": ["temp.txt"]
+    sample_repo_structure_results = {"missing_directories": [], "unexpected_files": []}
+    sample_notebook_stats = {"total_code_cells": 10, "total_markdown_cells": 5}
+    other_reports = {
+        "Security Vulnerability Scans": "No security vulnerabilities found.",
+        "Dependency Analysis": "All dependencies are secure.",
     }
-    # Example notebook statistics (adjust as necessary)
-    sample_notebook_stats = {
-        "total_code_cells": 10,
-        "total_markdown_cells": 5,
-    }
-    # Assuming other_reports is a dictionary of other check results
-    markdown_report = generate_markdown_report(sample_quality_reports, sample_repo_structure_results, sample_notebook_stats)
+    improvement_plan = [
+        "Review and address all code style issues.",
+        "Reduce complexity in high-complexity functions.",
+        "Ensure all dependencies are up-to-date and secure.",
+    ]
 
-    report_file_path = "/autograder/autograder_report.md" 
+    markdown_report = generate_markdown_report(
+        sample_quality_reports,
+        sample_repo_structure_results,
+        sample_notebook_stats,
+        other_reports,
+        improvement_plan
+    )
+
+    report_file_path = "reports/autograder_report.md"
     save_markdown_report(markdown_report, report_file_path)

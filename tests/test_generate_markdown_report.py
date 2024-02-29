@@ -3,7 +3,7 @@ from jupyterquest.generate_markdown_report import generate_markdown_report
 
 class TestMarkdownReport(unittest.TestCase):
     def test_report_generation(self):
-        # Mock data for quality reports
+        # Prepare mock data
         sample_quality_reports = {
             "Code Block 1": {
                 "Complexity": [("example_function", 2, "B")],
@@ -14,45 +14,54 @@ class TestMarkdownReport(unittest.TestCase):
                 "Structure": "Complex but manageable structure."
             }
         }
-
-        # Mock data for repository structure results
-        sample_repo_structure_results = {
-            "missing_directories": [],
-            "unexpected_files": []
-        }
-
-        # Adding mock notebook_stats with total_code_cells
-        notebook_stats = {
-            "total_code_cells": 5  # Assuming there are 5 code cells in the notebook
-        }
-
-        # Generate the report with the mock data
+        sample_repo_structure_results = {"missing_directories": [], "unexpected_files": []}
+        notebook_stats = {"total_code_cells": 5, "total_markdown_cells": 3}  # Updated to include markdown cells
         other_reports = {
             "Code Style Results": "No issues found.",
-            "Commit Analysis Results": "No commit message issues."
+            "Commit Analysis Results": "No commit message issues.",
+            "Security Vulnerability Scans": "No security vulnerabilities found.",
+            "Dependency Analysis": "All dependencies are secure."
         }
-        report = generate_markdown_report(
-            sample_quality_reports, 
-            sample_repo_structure_results, 
-            notebook_stats, 
-            other_reports
-)
+        improvement_plan = [
+            "Review and address all code style issues.",
+            "Reduce complexity in high-complexity functions.",
+            "Ensure all dependencies are up-to-date and secure."
+        ]
 
-        # Test for presence of key sections and content in the report
+        # Generate report
+        report = generate_markdown_report(
+            sample_quality_reports,
+            sample_repo_structure_results,
+            notebook_stats,
+            other_reports,
+            improvement_plan  # Now passing the improvement plan
+        )
+
+        # Assertions to check the presence of new sections and content
+        self.assertIn("## Summary", report)
+        self.assertIn("This report outlines the findings", report)
+        self.assertIn("## Improvement Plan", report)
+        self.assertIn("Review and address all code style issues.", report)
+        self.assertIn("## Additional Resources", report)
+        self.assertIn("[Python Official Documentation](https://docs.python.org/3/)", report)
+        
+        # Existing checks
         self.assertIn("## Code Quality Checks", report)
         self.assertIn("Well-structured with clear logic.", report)
-        self.assertIn("Complex but manageable structure.", report)
-        self.assertIn("- **Total Code Cells**: 5\n", report)  # Ensure this line checks the actual inclusion of total_code_cells in the report
-        self.assertIn("Complex but manageable structure.", report)
         self.assertIn("## Repository Structure Check", report)
         self.assertIn("- **Missing Directories**: ", report)
-        self.assertIn("- **Unexpected Files**: ", report)
-        # Test for additional sections if applicable
+        
+        # Checks for other reports
         self.assertIn("## Code Style Results", report)
         self.assertIn("No issues found.", report)
-        self.assertIn("## Commit Analysis Results", report)
-        self.assertIn("No commit message issues.", report)
+        self.assertIn("## Security Vulnerability Scans", report)
+        self.assertIn("No security vulnerabilities found.", report)
+        self.assertIn("## Dependency Analysis", report)
+        self.assertIn("All dependencies are secure.", report)
+        
+        # Check for notebook stats
+        self.assertIn("- **Total Code Cells**: 5\n", report)
+        self.assertIn("- **Total Markdown Cells**: 3\n", report)
 
-# Run the tests
 if __name__ == '__main__':
     unittest.main()
