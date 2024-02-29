@@ -69,4 +69,4 @@ if __name__ == "__main__":
     markdown_report = generate_markdown_report(sample_quality_reports, sample_repo_structure_results, sample_notebook_stats)
 
     report_file_path = "/autograder/autograder_report.md" 
-    save_markdown_report(markdown_report, report_file_path) 
+    save_markdown_report(markdown_report, report_file_path)

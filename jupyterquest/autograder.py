@@ -48,14 +48,14 @@ def main():
         'total_markdown_cells': len(markdown_cells)
     }
 
+    # Prepare other_reports if needed, or set to None
+    other_reports = None  # Adjust as needed based on your specific checks
+
     final_report = generate_markdown_report(
-        code_quality_results,
-        repo_structure_results,
-        {
-            "Code Style Results": code_style_results,
-            "Commit Analysis Results": commit_analysis_results,
-        },
-        notebook_stats=notebook_stats
+        quality_reports=code_quality_results,
+        repo_structure_results=repo_structure_results,
+        notebook_stats=notebook_stats,
+        other_reports=other_reports  # Can be None or a dictionary of other reports
     )
 
     # Save the report as a .md file
