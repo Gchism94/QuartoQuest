@@ -16,8 +16,10 @@ class TestCodeStyleCheck(unittest.TestCase):
 
     def test_linting_without_issues(self):
         # Prepare a list of code blocks without style issues
+        # The following code block is correctly formatted
+        # with no style issues and includes a newline character at the end
         code_blocks_without_style_issues = [
-            "import math\nx = 2\nprint(x)"  # Properly formatted code
+            "x = 2\nprint(x)\n"  # Correctly formatted code with no import statement
         ]
         # Check style for each block
         results = check_code_style(code_blocks_without_style_issues)
@@ -29,4 +31,3 @@ class TestCodeStyleCheck(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-

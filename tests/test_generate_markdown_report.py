@@ -27,7 +27,16 @@ class TestMarkdownReport(unittest.TestCase):
         }
 
         # Generate the report with the mock data
-        report = generate_markdown_report(sample_quality_reports, sample_repo_structure_results, notebook_stats)
+        other_reports = {
+            "Code Style Results": "No issues found.",
+            "Commit Analysis Results": "No commit message issues."
+        }
+        report = generate_markdown_report(
+            sample_quality_reports, 
+            sample_repo_structure_results, 
+            notebook_stats, 
+            other_reports
+)
 
         # Test for presence of key sections and content in the report
         self.assertIn("## Code Quality Checks", report)

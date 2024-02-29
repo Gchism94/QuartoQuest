@@ -37,8 +37,8 @@ def generate_markdown_report(quality_reports, repo_structure_results, notebook_s
 
     # Add other reports if any
     if other_reports:
-        report_md += "## Other Checks\n"
-        # Format other reports (this is a placeholder and should be expanded based on your needs)
+        for title, content in other_reports.items():
+            report_md += f"## {title}\n{content}\n"
 
     return report_md
 
