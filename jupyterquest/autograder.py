@@ -17,7 +17,8 @@ def main():
 
     # 1. Check Repository Structure
     required_directories = ['data', 'images']
-    allowed_files_patterns = ['README.md', '.gitignore', 'LICENSE', 'requirements.txt', '*.ipynb', 'hw-*', '*.py', 'check_allowed_files.py']
+    allowed_files_patterns = ['README.md', '.gitignore', 'LICENSE', 'requirements.txt', '*.ipynb', 'hw-0*.ipynb', '*.py', 'check_allowed_files.py',
+                              'hw-01.ipynb', 'hw-02.ipynb', 'hw-03.ipynb', 'hw-04.ipynb', 'hw-05.ipynb', 'hw-06.ipynb']
     repo_structure_results = check_directory_structure(
         repo_path, required_directories, allowed_files_patterns
     )
