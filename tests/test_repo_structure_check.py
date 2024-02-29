@@ -5,8 +5,8 @@ from jupyterquest.repo_structure_check import check_directory_structure
 
 class TestRepoStructureCheck(unittest.TestCase):
     def test_structure_check(self):
+        # Create a temporary directory and set up the expected structure
         with tempfile.TemporaryDirectory() as tmp_dir:
-            # Setup: Creating required directory and allowed file
             os.mkdir(os.path.join(tmp_dir, 'data'))
             with open(os.path.join(tmp_dir, 'README.md'), 'w') as f:
                 f.write('Sample README content')
@@ -17,7 +17,7 @@ class TestRepoStructureCheck(unittest.TestCase):
 
             # Test: Checking directory structure
             required_directories = ['data']
-            allowed_files_patterns = ['*.md', '.gitignore']  # Adjusted to use patterns
+            allowed_files_patterns = ['README.md', '*.md']  # Ensure README.md is matched
             result = check_directory_structure(tmp_dir, required_directories, allowed_files_patterns)
 
             # Assertions
