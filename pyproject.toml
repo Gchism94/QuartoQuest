@@ -3,9 +3,9 @@ requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "quartoquest"
-version = "0.1.0"
-description = "A Python package for automating grading of Quarto markdown files."
+name = "jupyterquest"
+version = "0.1.0"  # Consider incrementing based on recent changes
+description = "A Python package for automating grading of Jupyter notebook files."
 readme = "README.md"
 authors = [{name = "Greg Chism", email = "gchism@arizona.edu"}]
 license = { file = "LICENSE" }
@@ -15,18 +15,18 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-keywords = ["education", "autograder", "quarto", "markdown"]
+keywords = ["education", "autograder", "jupyter", "notebook"]
 dependencies = [
     "radon>=6.0.1",
     "GitPython>=3.1.41",
     "markdown>=3.5.2",
-    "flake8>=7.0.0",
-    "pylint>=3.0.3",
+    "flake8>=3.9.0",  
+    "pylint>=2.9.6",
     "pandoc>=2.3",
-    "pytest>=8.0.0",
+    "pytest>=6.2.5",
     "jupyter>=1.0.0",
     "nbformat>=5.9.2"
-    ]
+]
 
 [project.urls]
-Home = "https://github.com/Gchism94/quartoquest"
+Home = "https://github.com/Gchism94/jupyterquest"

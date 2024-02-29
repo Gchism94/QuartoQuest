@@ -1,4 +1,5 @@
 from radon.complexity import cc_rank, cc_visit
+import ast
 
 def assess_code_complexity(code):
     """
@@ -13,13 +14,18 @@ def assess_code_complexity(code):
 
 def assess_code_structure(code):
     """
-    Placeholder function for assessing code structure.
-    Implement custom logic for structure assessment here.
+    Assess code structure using Python's ast module to parse code and analyze its structure.
     Returns an assessment result.
     """
-    # Example: Check for proper function definitions, class usage, etc.
-    # This part will be highly language-specific and depends on your criteria
-    return "Structure assessment result here"
+    try:
+        tree = ast.parse(code)
+        # Example structure assessment: Count the number of function definitions
+        functions = [node for node in ast.walk(tree) if isinstance(node, ast.FunctionDef)]
+        num_functions = len(functions)
+        # This is a basic check; you can add more sophisticated analysis here
+        return f"Number of functions: {num_functions}"
+    except SyntaxError as e:
+        return f"Syntax error in code: {str(e)}"
 
 def assess_code_quality(code_blocks):
     """
@@ -46,4 +52,8 @@ if __name__ == "__main__":
         # ... other code blocks
     ]
     code_quality_results = assess_code_quality(sample_code_blocks)
-    print(code_quality_results)
+    for block, results in code_quality_results.items():
+        print(f"{block} Results:")
+        for key, value in results.items():
+            print(f"{key}: {value}")
+        print()  # Newline for readability

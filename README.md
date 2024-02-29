@@ -1,7 +1,7 @@
-# quartoquest: The Concise .qmd Autograder
+# jupyterquest: The Concise .ipynb Autograder
 
 ## Overview
-**quartoquest** is a powerful and efficient autograder designed to enhance the quality of `.qmd` (Quarto Markdown) files. Integrated with GitHub Actions, it automates the evaluation process for coding projects, focusing on code style, organization, commit clarity, and repository structure. It's an ideal tool for educators and teams seeking to ensure high standards in coding and documentation.
+**jupyterquest** is a powerful and efficient autograder designed to enhance the quality of `.ipynb` (Jupyter Notebook) files. Integrated with GitHub Actions, it automates the evaluation process for coding projects, focusing on code style, organization, commit clarity, and repository structure. It's an ideal tool for educators and teams seeking to ensure high standards in coding and documentation.
 
 ## Features
 - **Code Style Checks**: Ensures adherence to coding best practices, including spacing, line length, and more.
@@ -13,7 +13,7 @@
 ## Getting Started
 ### Prerequisites
 - GitHub account and basic understanding of GitHub Actions.
-- Familiarity with `.qmd` file format.
+- Familiarity with `.ipynb` file format.
 
 ### Installation
 1. **Fork or Clone the Repository**: 
@@ -27,11 +27,11 @@
    - Modify the `autograder.py` script to tailor the grading criteria to your specific requirements.
 
 ### Usage
-- **Integration**: Once set up, QuartoQuest will automatically run whenever a push is made to your repository.
+- **Integration**: Once set up, jupyterquest will automatically run whenever a push is made to your repository.
 - **Results**: After each run, the autograder will provide a report in the specified format, highlighting areas of improvement and success.
 
 ## Contribution
-Contributions to QuartoQuest are welcome! Please read our contributing guidelines to learn about how you can contribute to this project.
+Contributions to jupyterquest are welcome! Please read our contributing guidelines to learn about how you can contribute to this project.
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.

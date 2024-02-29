@@ -1,23 +1,23 @@
 import subprocess
+import tempfile
 
 def lint_code(code_block):
     """
     Lints a given code block using flake8.
+    Utilizes a temporary file for the code block, ensuring cleanup after linting.
     Returns a string containing the linting results.
     """
-    # Write the code block to a temporary file
-    with open('temp_code.py', 'w', encoding='utf-8') as temp_file:
+    with tempfile.NamedTemporaryFile(mode='w+', encoding='utf-8', suffix='.py', delete=True) as temp_file:
         temp_file.write(code_block)
+        temp_file.flush()  # Ensure data is written to disk
+        result = subprocess.run(['flake8', temp_file.name], capture_output=True, text=True)
 
-    # Run flake8 on the temporary file
-    result = subprocess.run(['flake8', 'temp_code.py'], capture_output=True, text=True)
-
-    # Return the linting output
-    return result.stdout if result.returncode == 0 else result.stderr
+    # Process and return the linting output
+    return result.stdout if result.stdout else result.stderr if result.stderr else "No issues found."
 
 def check_code_style(code_blocks):
     """
-    Checks the style of a list of code blocks.
+    Checks the style of a list of code blocks using flake8.
     Returns a list of linting results for each block.
     """
     results = []
@@ -28,7 +28,6 @@ def check_code_style(code_blocks):
 
 # Example usage
 if __name__ == "__main__":
-    # Sample code blocks - replace with actual extracted code blocks
     sample_code_blocks = [
         "import math\n\nx=2\nprint(x )",  # Sample code block with style issues
         "import math\n\nx = 2\nprint(x)"  # Sample code block without style issues

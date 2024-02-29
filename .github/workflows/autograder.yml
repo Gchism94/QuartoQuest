@@ -1,4 +1,4 @@
-name: QMD Autograder
+name: Jupyter Notebook Autograder
 on: [push]
 
 jobs:
@@ -11,41 +11,9 @@ jobs:
           python-version: '3.8'
       - run: pip install --upgrade pip
       - run: pip install -e .
-      - run: python -m quartoquest.repo_structure_check
+      - run: python -m jupyterquest.repo_structure_check
 
-  render-qmd:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python and Quarto environment
-        run: |
-          pip install jupyter
-          sudo apt-get update && sudo apt-get install -y wget
-          wget -q -O quarto.deb https://github.com/quarto-dev/quarto-cli/releases/download/v1.1.189/quarto-1.1.189-linux-amd64.deb
-          sudo dpkg -i quarto.deb
-          python -m pip install --upgrade pip 
-      - name: Find .qmd file in docs and render to HTML
-        run: |
-          qmd_file=$(find docs -name "*.qmd" -print -quit)
-          if [[ -n "$qmd_file" ]]; then
-            quarto render "$qmd_file"
-            html_file="${qmd_file%.*}.html"
-            if [[ -f "$html_file" ]]; then
-              echo "Rendered HTML file: $html_file"
-            else
-              echo "Failed to render HTML file" >&2
-              exit 1
-            fi
-          else
-            echo "No .qmd file found in docs"
-            exit 1
-          fi
-      - uses: actions/upload-artifact@v2
-        with:
-          name: rendered-html
-          path: '**/*.html'
-
-  run-other-autograder-tasks:
+  run-autograder-tasks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -54,4 +22,11 @@ jobs:
           python-version: '3.8'
       - run: pip install --upgrade pip
       - run: pip install -e .
-      - run: python -m quartoquest.autograder
+      - name: Check Code Style
+        run: python -m jupyterquest.code_style_check
+      - name: Assess Code Quality
+        run: python -m jupyterquest.code_quality_check
+      - name: Analyze Commit Messages
+        run: python -m jupyterquest.commit_analysis
+      - name: Run Autograder
+        run: python -m jupyterquest.autograder

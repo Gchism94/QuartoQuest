@@ -34,7 +34,7 @@ if __name__ == "__main__":
     repo_path = os.getenv('GITHUB_WORKSPACE', '.')
 
     required_directories = ['data']  # Modify as needed
-    allowed_files = ['README.md', '.gitignore', 'LICENSE', 'requirements.txt']  # Modify as needed
+    allowed_files = ['README.md', '.gitignore', 'LICENSE', 'requirements.txt', '*.ipynb', "data/*", "images/*"]  # Modify as needed
 
     structure_check_results = check_directory_structure(repo_path, required_directories, allowed_files)
     print(structure_check_results)

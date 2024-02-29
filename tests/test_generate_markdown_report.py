@@ -1,5 +1,5 @@
 import unittest
-from quartoquest.generate_markdown_report import generate_markdown_report
+from jupyterquest.generate_markdown_report import generate_markdown_report
 
 class TestMarkdownReport(unittest.TestCase):
     def test_report_generation(self):
@@ -22,8 +22,14 @@ class TestMarkdownReport(unittest.TestCase):
             "unexpected_files": []
         }
 
+        # Assuming inclusion of additional data such as code style and commit analysis results
+        additional_data = {
+            "Code Style Results": "No issues found.",
+            "Commit Analysis Results": "No commit message issues."
+        }
+
         # Generate the report with the mock data
-        report = generate_markdown_report(sample_quality_reports, sample_repo_structure_results)
+        report = generate_markdown_report(sample_quality_reports, sample_repo_structure_results, additional_data)
 
         # Test for presence of key sections and content in the report
         self.assertIn("## Code Quality Checks", report)
@@ -32,7 +38,11 @@ class TestMarkdownReport(unittest.TestCase):
         self.assertIn("## Repository Structure Check", report)
         self.assertIn("- **Missing Directories**: ", report)
         self.assertIn("- **Unexpected Files**: ", report)
-
+        # Test for additional sections if applicable
+        self.assertIn("## Code Style Results", report)
+        self.assertIn("No issues found.", report)
+        self.assertIn("## Commit Analysis Results", report)
+        self.assertIn("No commit message issues.", report)
 
 # Run the tests
 if __name__ == '__main__':

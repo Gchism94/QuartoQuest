@@ -11,12 +11,17 @@ def format_structure_report(structure_report):
     """
     Formats the structure report into a markdown string.
     """
-    # This is an example and will vary based on your structure assessment
     return f"### Structure Report\n- {structure_report}\n"
 
-def generate_markdown_report(quality_reports, repo_structure_results, other_reports=None):
+def generate_markdown_report(quality_reports, repo_structure_results, notebook_stats=None, other_reports=None):
     """Generates a comprehensive Markdown (.md) report from various checks."""
-    report_md = "# Introduction\n\nThis report presents the results of the autograding process...\n\n"
+    report_md = "# Introduction\n\nThis report presents the results of the autograding process for a Jupyter notebook...\n\n"
+
+    # Add Notebook Statistics (if applicable)
+    if notebook_stats:
+        report_md += "## Notebook Statistics\n"
+        report_md += f"- **Total Code Cells**: {notebook_stats['total_code_cells']}\n"
+        report_md += f"- **Total Markdown Cells**: {notebook_stats['total_markdown_cells']}\n\n"
 
     # Add Repository Structure Check Results
     report_md += "## Repository Structure Check\n"
@@ -26,14 +31,14 @@ def generate_markdown_report(quality_reports, repo_structure_results, other_repo
     # Add Code Quality Reports
     report_md += "## Code Quality Checks\n"
     for block_id, report in quality_reports.items():
-        report_md += f"#### {block_id}\n"
+        report_md += f"#### Cell {block_id}\n"
         report_md += format_complexity_report(report['Complexity']) + "\n"
         report_md += format_structure_report(report['Structure']) + "\n"
 
     # Add other reports if any
     if other_reports:
         report_md += "## Other Checks\n"
-        # Format other reports (placeholder)
+        # Format other reports (this is a placeholder and should be expanded based on your needs)
 
     return report_md
 
@@ -45,19 +50,23 @@ def save_markdown_report(report_content, file_path):
 # Example usage
 if __name__ == "__main__":
     sample_quality_reports = {
-        "Code Block 1": {
+        "Code Cell 1": {
             "Complexity": [("example_function", 2, "B")],
             "Structure": "Good structure and organization."
         },
-        # ... other code blocks
+        # ... other code cells
     }
     sample_repo_structure_results = {
         "missing_directories": ["data"],
         "unexpected_files": ["temp.txt"]
     }
+    # Example notebook statistics (adjust as necessary)
+    sample_notebook_stats = {
+        "total_code_cells": 10,
+        "total_markdown_cells": 5,
+    }
     # Assuming other_reports is a dictionary of other check results
-    markdown_report = generate_markdown_report(sample_quality_reports, sample_repo_structure_results)
+    markdown_report = generate_markdown_report(sample_quality_reports, sample_repo_structure_results, sample_notebook_stats)
 
     report_file_path = "/autograder/autograder_report.md" 
     save_markdown_report(markdown_report, report_file_path) 
-

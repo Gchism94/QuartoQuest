@@ -1,22 +1,25 @@
 name: Python Tests
 
-# Trigger on push and pull request events
 on: [push, pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.9', '3.10'] 
 
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.8'
+          python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-      - name: Install the package
-        run: pip install -e .
+          pip install -e .
+          # If you have a requirements.txt specifically for tests or additional dependencies
+          # pip install -r requirements.txt
       - name: Run tests with unittest
         run: python -m unittest discover tests
