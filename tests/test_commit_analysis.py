@@ -8,16 +8,16 @@ class TestCommitAnalysis(unittest.TestCase):
     def test_analyze_commit_messages_valid_repo(self, mock_repo):
         # Setup mock
         mock_repo.return_value.iter_commits.return_value = [
-            MagicMock(message='feat: Add new feature\n'),
-            MagicMock(message='fix: Fix issue\n'),
-            MagicMock(message='Update readme\n')
+            MagicMock(message='feat: Add new feature\nDetailed explanation of the feature.'),
+            MagicMock(message='fix: Fix issue\nDetails about the fix.'),
+            MagicMock(message='Update readme\nThis is a minor update.')  # This should be counted as non-informative and non-conforming
         ]
         
         expected_result = {
             "total_commits": 3,
-            "short_message_issues": 0,
-            "non_informative_issues": 1,  # "Update readme\n" is non-informative
-            "non_conforming_messages": 1  # "Update readme\n" is non-conforming
+            "short_message_issues": 0,  # Assuming all first lines are above the minimum length
+            "non_informative_issues": 1,  # "Update readme" is considered non-informative
+            "non_conforming_messages": 1  # "Update readme" does not conform to the structured pattern
         }
         
         result = commit_analysis.analyze_commit_messages('/path/to/valid/repo')
@@ -41,4 +41,3 @@ class TestCommitAnalysis(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
- 

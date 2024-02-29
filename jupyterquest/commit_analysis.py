@@ -1,5 +1,6 @@
 from git import Repo
 from git.exc import InvalidGitRepositoryError, NoSuchPathError
+import re
 
 def analyze_commit_messages(repo_path):
     try:
@@ -7,7 +8,6 @@ def analyze_commit_messages(repo_path):
     except (InvalidGitRepositoryError, NoSuchPathError) as e:
         return f"Error with the repository: {str(e)}"
 
-    # Assuming 'main' is the branch to be analyzed, adjust as needed
     branch = 'main'
     try:
         commits = list(repo.iter_commits(branch))
@@ -21,23 +21,20 @@ def analyze_commit_messages(repo_path):
     non_informative_issues = 0
     non_conforming_messages = 0
 
-    # Define a list of non-informative keywords
+    # Adjust the list as needed based on your project's definition of non-informative
     non_informative_keywords = ['fix', 'update', 'minor', 'misc', 'changes']
 
-    # Define a regex pattern for a structured commit message, e.g., "TYPE: Description"
-    import re
+    # Adjust the regex pattern to fit your project's commit message structure more closely
     structured_message_pattern = re.compile(r"^(feat|fix|docs|style|refactor|perf|test|chore):\s.+")
 
     for commit in commits:
-        message = commit.message.strip()
-        # Check for short messages
-        if len(message) < 10:
+        # Evaluate only the first line for structured message conformity
+        first_line = commit.message.strip().split('\n', 1)[0]
+        if len(first_line) < 10:
             short_message_issues += 1
-        # Check for non-informative messages
-        if any(keyword in message.lower() for keyword in non_informative_keywords):
+        if any(keyword in first_line.lower() for keyword in non_informative_keywords):
             non_informative_issues += 1
-        # Check for structured commit message conformity
-        if not structured_message_pattern.match(message):
+        if not structured_message_pattern.match(first_line):
             non_conforming_messages += 1
 
     return {
@@ -48,6 +45,6 @@ def analyze_commit_messages(repo_path):
     }
 
 if __name__ == "__main__":
-    repo_path = '/path/to/your/repo'  # Adjust this path as necessary
+    repo_path = '/path/to/your/repo'
     commit_analysis_result = analyze_commit_messages(repo_path)
     print(commit_analysis_result)

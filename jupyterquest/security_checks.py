@@ -12,7 +12,7 @@ def run_bandit(code_block):
         result = subprocess.run(['bandit', '-f', 'custom', '--quiet', tmp.name], capture_output=True, text=True)
     # Format result for Markdown (e.g., bullet points)
     output = result.stdout if result.stdout else "No security issues found."
-    markdown_output = output.replace('\n', '\n- ')
+    markdown_output = "- " + output.replace('\n', '\n- ') if output != "No security issues found." else output
     return markdown_output
 
 def check_security_vulnerabilities(code_blocks):
