@@ -1,40 +1,41 @@
-# jupyterquest: The Concise .ipynb Autograder
+# jupyterquest: The Advanced .ipynb Autograder
 
 ## Overview
-**jupyterquest** is a powerful and efficient autograder designed to enhance the quality of `.ipynb` (Jupyter Notebook) files. Integrated with GitHub Actions, it automates the evaluation process for coding projects, focusing on code style, organization, commit clarity, and repository structure. It's an ideal tool for educators and teams seeking to ensure high standards in coding and documentation.
+**jupyterquest** is a comprehensive autograding tool designed to elevate the standard of Jupyter Notebook (.ipynb) submissions. Seamlessly integrated with GitHub Actions, it provides an automated evaluation process that spans across code style, structure, commit history, security vulnerabilities, and dependency checks. This tool is invaluable for educators, mentors, and development teams aiming to uphold best practices in code quality, security, and project organization.
 
 ## Features
-- **Code Style Checks**: Ensures adherence to coding best practices, including spacing, line length, and more.
-- **Code Organization**: Evaluates the logical structure and readability of code.
-- **Commit Quality Analysis**: Monitors the quality and quantity of Git commits.
-- **Repository Structure Validation**: Checks for correct file organization and naming conventions.
-- **Automated and Customizable**: Easy to integrate and customize according to specific grading needs.
+- **Code Style and Formatting Checks**: Enforces best practices and consistency in coding styles.
+- **Code Structure Analysis**: Assesses the organization and readability of code for maintainability.
+- **Commit Message Quality**: Evaluates the clarity and conformity of commit messages to best practices.
+- **Repository Structure Validation**: Ensures a logical and standardized file organization within repositories.
+- **Security Vulnerability Scans**: Identifies known vulnerabilities in project dependencies to ensure code safety.
+- **Dependency Analysis**: Checks for outdated or insecure dependencies that might compromise the project.
+- **Extensible and Automated**: Designed for easy integration with CI/CD workflows, offering customizable options to meet various grading and analysis needs.
 
 ## Getting Started
 ### Prerequisites
-- GitHub account and basic understanding of GitHub Actions.
-- Familiarity with `.ipynb` file format.
+- A GitHub account and a basic understanding of GitHub Actions.
+- Knowledge of Jupyter Notebooks and the `.ipynb` file format.
 
 ### Installation
-1. **Fork or Clone the Repository**: 
-   - Fork this repository to your GitHub account or clone it directly to your local machine.
+1. **Fork or Clone This Repository**: 
+   Start by forking this repository to your account or cloning it directly to your local environment.
 
-2. **Set Up GitHub Actions**:
-   - Navigate to your project's repository on GitHub.
-   - Go to the 'Actions' tab and set up a workflow using the provided `autograder.yml` file.
+2. **Configure GitHub Actions**:
+   In your repository on GitHub, navigate to the 'Actions' tab. Set up a new workflow with the provided `autograder.yml` workflow file.
 
-3. **Customize Autograder Settings** (optional):
-   - Modify the `autograder.py` script to tailor the grading criteria to your specific requirements.
+3. **Customize the Autograder** (Optional):
+   Adjust the `autograder.py` and other relevant scripts to fine-tune the grading criteria and checks according to your project or course requirements.
 
 ### Usage
-- **Integration**: Once set up, jupyterquest will automatically run whenever a push is made to your repository.
-- **Results**: After each run, the autograder will provide a report in the specified format, highlighting areas of improvement and success.
+- **Automatic Execution**: jupyterquest runs automatically with each push to the repository, thanks to GitHub Actions integration.
+- **Reports**: The autograder generates detailed Markdown reports, offering actionable insights on code improvements and highlighting commendable practices.
 
 ## Contribution
-Contributions to jupyterquest are welcome! Please read our contributing guidelines to learn about how you can contribute to this project.
+We encourage contributions! If you're interested in enhancing jupyterquest or adding new features, please consult our contributing guidelines for more information on how to get started.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+jupyterquest is made available under the MIT License. For more details, see the [LICENSE](LICENSE) file.
 
 ## Support and Contact
-For support or inquiries, please open an issue in this repository.
+Need help or have questions? Feel free to [open an issue](https://github.com/Gchism94/jupyterquest/issues) in this repository for support and inquiries.

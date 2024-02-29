@@ -11,7 +11,7 @@ class TestAutograder(unittest.TestCase):
     @patch('jupyterquest.autograder.assess_code_quality')
     @patch('jupyterquest.autograder.check_code_style')
     @patch('jupyterquest.autograder.analyze_commit_messages')
-    @patch('jupyterquest.autograder.run_security_checks')
+    @patch('jupyterquest.autograder.check_security_vulnerabilities')
     @patch('jupyterquest.autograder.check_dependencies')
     @patch('jupyterquest.autograder.save_markdown_report')
     def test_main_integration(self, mock_save, mock_check_deps, mock_run_security, mock_analyze_commits, mock_check_style, mock_assess_quality, mock_parse, mock_check_structure, mock_glob, mock_getenv):

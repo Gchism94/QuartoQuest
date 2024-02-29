@@ -3,7 +3,7 @@ import glob
 from .repo_structure_check import check_directory_structure
 from .code_quality_check import assess_code_quality
 from .code_style_check import check_code_style
-from .security_checks import run_security_checks  # Ensure this matches your actual function name
+from .security_checks import check_security_vulnerabilities  # Ensure this matches your actual function name
 from .dependency_checks import check_dependencies  # Ensure this matches your actual function name
 from .commit_analysis import analyze_commit_messages
 from .parse_ipynb import parse_ipynb
@@ -45,7 +45,7 @@ def main():
     print("Commit Analysis Results:", commit_analysis_results)
 
     # 4. Security Checks and Dependency Analysis
-    security_report = run_security_checks()  # Assuming no arguments needed, adjust as necessary
+    security_report = check_security_vulnerabilities()  # Assuming no arguments needed, adjust as necessary
     dependency_report = check_dependencies()
 
     # Prepare other_reports with security and dependency reports
