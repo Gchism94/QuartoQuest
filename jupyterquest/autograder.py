@@ -1,11 +1,11 @@
 import os
 import glob
-from . import check_directory_structure
-from . import assess_code_quality
-from . import check_code_style
-from . import analyze_commit_messages
-from . import parse_ipynb  # Updated to reflect correct function name for parsing .ipynb files
-from . import generate_markdown_report, save_markdown_report
+from .repo_structure_check import check_directory_structure
+from .code_quality_check import assess_code_quality
+from .code_style_check import check_code_style
+from .commit_analysis import analyze_commit_messages
+from .parse_ipynb import parse_ipynb
+from .generate_markdown_report import generate_markdown_report, save_markdown_report
 
 def find_first_ipynb_file(repo_path):
     """Finds the first .ipynb file in the given directory."""
