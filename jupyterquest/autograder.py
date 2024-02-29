@@ -60,7 +60,7 @@ def main():
     )
 
     # Save the report as a .md file
-    report_file_path = os.path.join(repo_path, 'autograder_report.md')
+    report_file_path = os.path.join("reports", "autograder_report.md")
     save_markdown_report(final_report, report_file_path)
 
 if __name__ == "__main__":
