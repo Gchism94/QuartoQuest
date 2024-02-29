@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "jupyterquest"
-version = "0.1.0"  # Consider incrementing based on recent changes
+version = "0.1.1"  # Incrementing version to reflect new changes
 description = "A Python package for automating grading of Jupyter notebook files."
 readme = "README.md"
 authors = [{name = "Greg Chism", email = "gchism@arizona.edu"}]
@@ -20,12 +20,13 @@ dependencies = [
     "radon>=6.0.1",
     "GitPython>=3.1.41",
     "markdown>=3.5.2",
-    "flake8>=3.9.0",  
+    "flake8>=3.9.0",
     "pylint>=2.9.6",
     "pandoc>=2.3",
     "pytest>=6.2.5",
     "jupyter>=1.0.0",
-    "nbformat>=5.9.2"
+    "nbformat>=5.9.2",
+    "requests>=2.25.1"
 ]
 
 [project.urls]
