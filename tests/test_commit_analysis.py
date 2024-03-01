@@ -15,11 +15,12 @@ class TestCommitAnalysis(unittest.TestCase):
             MagicMock(message='Update readme\nMinor updates.\n')
         ]
 
+        # Assuming the "Update readme" commit is both non-informative and non-conforming based on your criteria.
         expected_result = {
             "total_commits": 3,
             "short_message_issues": 0,
-            "non_informative_issues": 1,
-            "non_conforming_messages": 1
+            "non_informative_issues": 1,  # Assuming "Update readme" is considered non-informative
+            "non_conforming_messages": 1  # Assuming "Update readme" does not match the structured message pattern
         }
 
         result = analyze_commit_messages('/path/to/valid/repo')
