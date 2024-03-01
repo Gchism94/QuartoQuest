@@ -10,20 +10,21 @@ def run_bandit(code_block):
     with tempfile.NamedTemporaryFile('w+', delete=True, suffix='.py') as tmp:
         tmp.write(code_block)
         tmp.flush()  # Ensure the written content is flushed to disk before running Bandit
-        # Adjust Bandit command to use a format that works well with markdown if necessary
         result = subprocess.run(['bandit', '-f', 'txt', '--quiet', tmp.name], capture_output=True, text=True)
     
-    # Always apply Markdown formatting to the output, regardless of the content
     if result.stdout:
-        output_lines = result.stdout.strip().split('\n')
-        markdown_output = '\n- '.join(output_lines)
-        return "- " + markdown_output
+        # Check if the result indicates no issues found
+        if "No issues identified." in result.stdout:
+            return "No security issues found."
+        else:
+            output_lines = result.stdout.strip().split('\n')
+            markdown_output = '\n- '.join(output_lines)
+            return "- " + markdown_output
     elif result.stderr:
         # Handle potential errors from Bandit more explicitly
-        return f"Error running Bandit: {result.stderr}"
+        return f"Error running Bandit: {result.stderr.strip()}"
     else:
         return "No security issues found."
-    
 
 def check_security_vulnerabilities(code_blocks):
     """
