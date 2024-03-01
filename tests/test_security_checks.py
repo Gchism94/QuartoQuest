@@ -16,6 +16,7 @@ class TestDependencyChecks(unittest.TestCase):
         # Simulate Safety finding issues
         mock_output = "1: issue found\n2: another issue found"
         mock_run.return_value = MagicMock(stdout=mock_output, stderr="")
+        result = dependency_checks.run_safety()
         # Verifying presence of critical information
         self.assertTrue("issue found" in result and "1:" in result and "2:" in result)
 
@@ -31,6 +32,7 @@ class TestDependencyChecks(unittest.TestCase):
         # Simulate pip-audit finding issues
         mock_output = "1: issue found\n2: another issue found"
         mock_run.return_value = MagicMock(stdout=mock_output, stderr="")
+        result = dependency_checks.run_pip_audit()
         # Verifying presence of critical information
         self.assertTrue("issue found" in result and "1:" in result and "2:" in result)
 
