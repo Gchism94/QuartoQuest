@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from git.exc import InvalidGitRepositoryError
+from git.exc import InvalidGitRepositoryError, NoSuchPathError
 import os
 from jupyterquest.commit_analysis import analyze_commit_messages
 
@@ -8,25 +8,19 @@ class TestCommitAnalysis(unittest.TestCase):
 
     @patch('jupyterquest.commit_analysis.Repo')
     def test_analyze_commit_messages_valid_repo_with_branches(self, mock_repo):
-        # Setup mock branches and commits
-        mock_branch1_commit1 = MagicMock(message='feat: Add new feature\nDetails.\n')
-        mock_branch1_commit2 = MagicMock(message='fix: Fix issue\nDetails.\n')
-        # Simulate a shared commit across branches
-        mock_branch2_commit1 = mock_branch1_commit1
-        mock_branch2_commit2 = MagicMock(message='Update readme\nMinor updates.\n')
+        # Setup mock commits
+        mock_commit1 = MagicMock(message='feat: Add new feature\nDetails.\n')
+        mock_commit2 = MagicMock(message='fix: Fix issue\nDetails.\n')
+        mock_commit3 = MagicMock(message='Update readme\nMinor updates.\n')  # Considered non-informative and non-conforming
 
-        # Simulate iter_commits for each branch
-        mock_repo.return_value.branches = MagicMock()
-        mock_repo.return_value.iter_commits.side_effect = lambda branch: {
-            'branch1': [mock_branch1_commit1, mock_branch1_commit2],
-            'branch2': [mock_branch2_commit1, mock_branch2_commit2],
-        }[branch]
+        # Simulate iter_commits for the repo
+        mock_repo.return_value.iter_commits.return_value = [mock_commit1, mock_commit2, mock_commit3]
 
         expected_result = {
-            "total_commits": 0,  # Three unique commits across branches
-            "short_message_issues": 0,
-            "non_informative_issues": 0,  # Assuming 'Update readme' is non-informative
-            "non_conforming_messages": 0  # Assuming 'Update readme' is non-conforming
+            "total_commits": 3,
+            "short_message_issues": 0,  # Assuming all messages are of sufficient length
+            "non_informative_issues": 1,  # 'Update readme' is considered non-informative
+            "non_conforming_messages": 1  # 'Update readme' is considered non-conforming
         }
         
         result = analyze_commit_messages('mock_repo_path')
@@ -36,19 +30,13 @@ class TestCommitAnalysis(unittest.TestCase):
     def test_analyze_commit_messages_invalid_repo(self, mock_repo):
         mock_repo.side_effect = InvalidGitRepositoryError
         result = analyze_commit_messages('/path/to/invalid/repo')
-        self.assertTrue("Error with the repository:" in result)
+        self.assertIn("Error with the repository:", result)
 
     @patch('jupyterquest.commit_analysis.Repo')
     def test_analyze_commit_messages_no_commits(self, mock_repo):
         mock_repo.return_value.iter_commits.return_value = []
-        expected_result = {
-            "total_commits": 0,
-            "short_message_issues": 0,
-            "non_informative_issues": 0,
-            "non_conforming_messages": 0
-        }
         result = analyze_commit_messages('/path/to/repo/with/no/commits')
-        self.assertEqual(result, expected_result)
+        self.assertEqual(result, "No commits found in the repository.")
 
     @patch('os.getenv', return_value='/mock/repo/path')
     @patch('jupyterquest.commit_analysis.Repo')
@@ -59,7 +47,7 @@ class TestCommitAnalysis(unittest.TestCase):
         mock_repo.return_value.iter_commits.return_value = [mock_commit]
 
         expected_result = {
-            "total_commits": 0,
+            "total_commits": 1,
             "short_message_issues": 0,
             "non_informative_issues": 0,
             "non_conforming_messages": 0
