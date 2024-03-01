@@ -31,10 +31,6 @@ def generate_markdown_report(quality_reports, repo_structure_results, notebook_s
         report_md += f"- **Complexity**: {report.get('Complexity', 'N/A')}\n"
         report_md += f"- **Structure**: {report.get('Structure', 'N/A')}\n\n"
 
-    # Other Reports
-    if other_reports:
-        for title, content in other_reports.items():
-            report_md += f"## {title}\n\n{content}\n\n"
 
     # Commit Analysis Results
     if commit_analysis_results:
@@ -42,6 +38,13 @@ def generate_markdown_report(quality_reports, repo_structure_results, notebook_s
         for key, value in commit_analysis_results.items():
             report_md += f"- **{key.replace('_', ' ').title()}**: {value}\n"
         report_md += "\n"
+
+        
+    # Other Reports
+    if other_reports:
+        for title, content in other_reports.items():
+            report_md += f"## {title}\n\n{content}\n\n"
+
 
     # Improvement Plan
     if improvement_plan:
@@ -70,8 +73,11 @@ if __name__ == "__main__":
     sample_quality_reports = {
         "Code Cell 1": {"Complexity": "Low", "Structure": "Good"},
     }
+
     sample_repo_structure_results = {"missing_directories": [], "unexpected_files": []}
+
     sample_notebook_stats = {"total_code_cells": 10, "total_markdown_cells": 5}
+
     other_reports = {
         "Security Vulnerability Scans": "No security vulnerabilities found.",
         "Dependency Analysis": "All dependencies are secure.",

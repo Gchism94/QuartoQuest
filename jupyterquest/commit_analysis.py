@@ -15,15 +15,21 @@ def analyze_commit_messages(repo_path):
 
     non_informative_keywords = ['fix', 'update', 'minor', 'misc', 'changes']
     structured_message_pattern = re.compile(r"^(feat|fix|docs|style|refactor|perf|test|chore):\s.+")
+    exclude_phrase = "Add autograder report"  # Phrase to exclude
 
     # Include commits from all refs (branches, tags, etc.)
     for ref in repo.references:
         for commit in repo.iter_commits(ref):
             if commit.hexsha not in processed_commits:
+                first_line = commit.message.strip().split('\n', 1)[0]
+                
+                # Skip commits with the excluded phrase
+                if exclude_phrase in commit.message:
+                    continue
+
                 processed_commits.add(commit.hexsha)
                 total_commits += 1
 
-                first_line = commit.message.strip().split('\n', 1)[0]
                 if len(first_line) < 10:
                     short_message_issues += 1
                 if any(keyword in first_line.lower() for keyword in non_informative_keywords):
