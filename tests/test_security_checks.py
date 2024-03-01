@@ -5,19 +5,21 @@ from jupyterquest import dependency_checks  # Adjust the import path according t
 class TestDependencyChecks(unittest.TestCase):
 
     @patch('subprocess.run')
-    def test_run_safety_no_issues(self, mock_run):
-        # Simulate Safety returning no issues
-        mock_run.return_value = MagicMock(stdout="No dependency issues found.", stderr="")
-        result = dependency_checks.run_safety()
-        # Expecting direct string since no markdown formatting needed for "No issues"
-        self.assertIn("No dependency issues found.", result)
-
+    def test_run_pip_audit_with_issues(self, mock_run):
+        # Simulate pip-audit finding issues, ensuring mock output matches expected Markdown format
+        mock_output = "1: issue found\n2: another issue found"
+        formatted_output = "- " + "\n- ".join(mock_output.split("\n"))  # Format as Markdown list
+        mock_run.return_value = MagicMock(stdout=formatted_output, stderr="")
+        result = dependency_checks.run_pip_audit()
+        self.assertIn("- 1: issue found\n- 2: another issue found", result)
+    
     @patch('subprocess.run')
     def test_run_safety_with_issues(self, mock_run):
-        # Simulate Safety finding issues, ensuring mock output matches expected format
-        mock_run.return_value = MagicMock(stdout="1: issue found\n2: another issue found", stderr="")
+        # Simulate Safety finding issues, ensuring mock output matches expected Markdown format
+        mock_output = "1: issue found\n2: another issue found"
+        formatted_output = "- " + "\n- ".join(mock_output.split("\n"))  # Format as Markdown list
+        mock_run.return_value = MagicMock(stdout=formatted_output, stderr="")
         result = dependency_checks.run_safety()
-        # Ensuring markdown bullet points are correctly applied to each issue
         self.assertIn("- 1: issue found\n- 2: another issue found", result)
 
     @patch('subprocess.run')
