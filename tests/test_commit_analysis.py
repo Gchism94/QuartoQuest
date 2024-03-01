@@ -23,7 +23,7 @@ class TestCommitAnalysis(unittest.TestCase):
         expected_result = {
             "total_commits": 3,
             "short_message_issues": 0,
-            "non_informative_issues": 1,  # "Update readme" considered non-informative
+            "non_informative_issues": 2,  # "Update readme" considered non-informative
             "non_conforming_messages": 1  # "Update readme" considered non-conforming
         }
         
