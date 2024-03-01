@@ -7,6 +7,26 @@ from jupyterquest.commit_analysis import analyze_commit_messages
 class TestCommitAnalysis(unittest.TestCase):
 
     @patch('jupyterquest.commit_analysis.Repo')
+    def test_analyze_commit_messages_valid_repo_with_branches_and_exclusions(self, mock_repo):
+        # Setup mock commits with an author
+        mock_commit1 = MagicMock(message='feat: Add new feature\nDetails.\n', author=MagicMock(name='SomeUser'))
+        mock_commit2 = MagicMock(message='fix: Fix issue\nDetails.\n', author=MagicMock(name='Gchism94'))
+        mock_commit3 = MagicMock(message='Update readme\nMinor updates.\n', author=MagicMock(name='SomeUser'))  # Considered non-informative and non-conforming
+
+        # Simulate iter_commits for the repo
+        mock_repo.return_value.iter_commits.return_value = [mock_commit1, mock_commit2, mock_commit3]
+
+        expected_result = {
+            "total_commits": 2,  # One commit by Gchism94 excluded
+            "short_message_issues": 0,
+            "non_informative_issues": 1,  # 'Update readme' is considered non-informative
+            "non_conforming_messages": 1  # 'Update readme' is considered non-conforming
+        }
+        
+        result = analyze_commit_messages('mock_repo_path', 'some_repo')  # Assuming 'some_repo' is not 'autograder-test'
+        self.assertEqual(result, expected_result)
+    
+    @patch('jupyterquest.commit_analysis.Repo')
     def test_analyze_commit_messages_valid_repo_with_branches(self, mock_repo):
         # Setup mock commits
         mock_commit1 = MagicMock(message='feat: Add new feature\nDetails.\n')

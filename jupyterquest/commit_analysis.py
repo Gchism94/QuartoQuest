@@ -3,7 +3,7 @@ from git.exc import InvalidGitRepositoryError, NoSuchPathError
 import re
 import os
 
-def analyze_commit_messages(repo_path):
+def analyze_commit_messages(repo_path, repo_name=""):
     try:
         repo = Repo(repo_path)
     except (InvalidGitRepositoryError, NoSuchPathError) as e:
@@ -16,15 +16,16 @@ def analyze_commit_messages(repo_path):
     non_informative_keywords = ['fix', 'update', 'minor', 'misc', 'changes']
     structured_message_pattern = re.compile(r"^(feat|fix|docs|style|refactor|perf|test|chore):\s.+")
     exclude_phrase = "Add autograder report"  # Phrase to exclude
+    excluded_author = "Gchism94"
 
     # Include commits from all refs (branches, tags, etc.)
     for ref in repo.references:
         for commit in repo.iter_commits(ref):
             if commit.hexsha not in processed_commits:
                 first_line = commit.message.strip().split('\n', 1)[0]
-                
-                # Skip commits with the excluded phrase
-                if exclude_phrase in commit.message:
+
+                # Skip commits with the excluded phrase or by the excluded author (except in autograder-test repo)
+                if exclude_phrase in commit.message or (commit.author.name == excluded_author and repo_name != "autograder-test"):
                     continue
 
                 processed_commits.add(commit.hexsha)
@@ -46,5 +47,7 @@ def analyze_commit_messages(repo_path):
 
 if __name__ == "__main__":
     repo_path = os.getenv('GITHUB_WORKSPACE', '.')
-    commit_analysis_result = analyze_commit_messages(repo_path)
+    # Example usage, assuming repo_name can be determined or passed somehow
+    repo_name = "autograder-test"  # This would need to be dynamically determined based on your application's context
+    commit_analysis_result = analyze_commit_messages(repo_path, repo_name)
     print(commit_analysis_result)
