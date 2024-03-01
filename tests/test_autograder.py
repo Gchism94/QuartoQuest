@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from autograder import main
+from jupyterquest.autograder import main
 import os
 
 class TestAutograder(unittest.TestCase):
