@@ -103,8 +103,7 @@ def main():
     # Prepare other reports with security and dependency reports
     other_reports = {
         "Security Vulnerability Scans": security_report,
-        "Dependency Analysis": dependency_report,
-        "Commit Analysis Results": "\n".join([f"- {message}" for message in commit_analysis_results])
+        "Dependency Analysis": dependency_report
     }
 
     # Compile all results into a final Markdown report
@@ -117,8 +116,8 @@ def main():
         quality_reports=code_quality_results,
         repo_structure_results=repo_structure_results,
         notebook_stats=notebook_stats,
-        other_reports=other_reports,
-        commit_analysis_results=commit_analysis_results
+        commit_analysis_results=commit_analysis_results,
+        other_reports=other_reports
     )
 
     # Convert Markdown report to HTML

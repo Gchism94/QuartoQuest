@@ -1,15 +1,15 @@
 import os
 
-def generate_markdown_report(quality_reports, repo_structure_results, notebook_stats=None, other_reports=None, improvement_plan=None, commit_analysis_results=None):
+def generate_markdown_report(quality_reports, repo_structure_results, notebook_stats=None, commit_analysis_results=None, other_reports=None, improvement_plan=None):
     """
     Generates a comprehensive Markdown report from various checks.
 
     :param quality_reports: Dictionary of code quality reports.
     :param repo_structure_results: Dictionary of repository structure results.
     :param notebook_stats: Dictionary of notebook statistics.
+    :param commit_analysis_results: Dictionary of commit analysis results.
     :param other_reports: Dictionary of other reports (e.g., security, dependency checks).
     :param improvement_plan: List of improvement actions.
-    :param commit_analysis_results: Dictionary of commit analysis results.
     :return: Markdown formatted report as a string.
     """
     report_md = "# Code Review Report\n\n## Summary\nThis report outlines the findings from the automated code review process.\n\n"
@@ -39,7 +39,7 @@ def generate_markdown_report(quality_reports, repo_structure_results, notebook_s
             report_md += f"- **{key.replace('_', ' ').title()}**: {value}\n"
         report_md += "\n"
 
-        
+
     # Other Reports
     if other_reports:
         for title, content in other_reports.items():
@@ -78,16 +78,18 @@ if __name__ == "__main__":
 
     sample_notebook_stats = {"total_code_cells": 10, "total_markdown_cells": 5}
 
-    other_reports = {
-        "Security Vulnerability Scans": "No security vulnerabilities found.",
-        "Dependency Analysis": "All dependencies are secure.",
-    }
     sample_commit_analysis_results = {
         "total_commits": 42,
         "short_message_issues": 5,
         "non_informative_issues": 3,
         "non_conforming_messages": 2
     }
+
+    other_reports = {
+        "Security Vulnerability Scans": "No security vulnerabilities found.",
+        "Dependency Analysis": "All dependencies are secure.",
+    }
+
     improvement_plan = [
         "Review and address all code style issues.",
         "Reduce complexity in high-complexity functions.",
@@ -99,7 +101,7 @@ if __name__ == "__main__":
         sample_quality_reports,
         sample_repo_structure_results,
         sample_notebook_stats,
+        sample_commit_analysis_results,
         other_reports,
-        improvement_plan,
-        sample_commit_analysis_results
+        improvement_plan
     )
