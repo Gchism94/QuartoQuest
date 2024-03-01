@@ -1,6 +1,6 @@
 import os
 
-def generate_markdown_report(quality_reports, repo_structure_results, notebook_stats=None, other_reports=None, improvement_plan=None):
+def generate_markdown_report(quality_reports, repo_structure_results, notebook_stats=None, other_reports=None, improvement_plan=None, commit_analysis_results=None):
     """
     Generates a comprehensive Markdown report from various checks.
 
@@ -9,13 +9,10 @@ def generate_markdown_report(quality_reports, repo_structure_results, notebook_s
     :param notebook_stats: Dictionary of notebook statistics.
     :param other_reports: Dictionary of other reports (e.g., security, dependency checks).
     :param improvement_plan: List of improvement actions.
+    :param commit_analysis_results: Dictionary of commit analysis results.
     :return: Markdown formatted report as a string.
     """
-    report_md = "# Code Review Report\n\n"
-
-    # Summary Section
-    report_md += "## Summary\n\n"
-    report_md += "This report outlines the findings from the automated code review process. It highlights key areas for improvement and acknowledges best practices found within the codebase.\n\n"
+    report_md = "# Code Review Report\n\n## Summary\nThis report outlines the findings from the automated code review process.\n\n"
 
     # Include notebook stats if provided
     if notebook_stats:
@@ -39,6 +36,13 @@ def generate_markdown_report(quality_reports, repo_structure_results, notebook_s
         for title, content in other_reports.items():
             report_md += f"## {title}\n\n{content}\n\n"
 
+    # Commit Analysis Results
+    if commit_analysis_results:
+        report_md += "## Commit Analysis Results\n\n"
+        for key, value in commit_analysis_results.items():
+            report_md += f"- **{key.replace('_', ' ').title()}**: {value}\n"
+        report_md += "\n"
+
     # Improvement Plan
     if improvement_plan:
         report_md += "## Improvement Plan\n\n"
@@ -56,13 +60,13 @@ def generate_markdown_report(quality_reports, repo_structure_results, notebook_s
 
 def save_markdown_report(report_content, file_path):
     """Saves the given Markdown report content to a file."""
-    os.makedirs(os.path.dirname(file_path), exist_ok=True)  # Ensure the directory exists
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
     with open(file_path, 'w', encoding='utf-8') as file:
         file.write(report_content)
 
 # Example usage
 if __name__ == "__main__":
-    # Mock data for demonstration
+    # Mock data for demonstration purposes
     sample_quality_reports = {
         "Code Cell 1": {"Complexity": "Low", "Structure": "Good"},
     }
@@ -72,19 +76,24 @@ if __name__ == "__main__":
         "Security Vulnerability Scans": "No security vulnerabilities found.",
         "Dependency Analysis": "All dependencies are secure.",
     }
+    sample_commit_analysis_results = {
+        "total_commits": 42,
+        "short_message_issues": 5,
+        "non_informative_issues": 3,
+        "non_conforming_messages": 2
+    }
     improvement_plan = [
         "Review and address all code style issues.",
         "Reduce complexity in high-complexity functions.",
         "Ensure all dependencies are up-to-date and secure.",
     ]
 
+    # Generate the report
     markdown_report = generate_markdown_report(
         sample_quality_reports,
         sample_repo_structure_results,
         sample_notebook_stats,
         other_reports,
-        improvement_plan
+        improvement_plan,
+        sample_commit_analysis_results
     )
-
-    report_file_path = "reports/autograder_report.md"
-    save_markdown_report(markdown_report, report_file_path)

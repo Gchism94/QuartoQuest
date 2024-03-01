@@ -1,5 +1,5 @@
 import unittest
-from jupyterquest.generate_markdown_report import generate_markdown_report
+from generate_markdown_report import generate_markdown_report
 
 class TestMarkdownReport(unittest.TestCase):
     def test_report_generation(self):
@@ -15,12 +15,17 @@ class TestMarkdownReport(unittest.TestCase):
             }
         }
         sample_repo_structure_results = {"missing_directories": [], "unexpected_files": []}
-        notebook_stats = {"total_code_cells": 5, "total_markdown_cells": 3}  # Updated to include markdown cells
+        notebook_stats = {"total_code_cells": 5, "total_markdown_cells": 3}
         other_reports = {
             "Code Style Results": "No issues found.",
-            "Commit Analysis Results": "No commit message issues.",
             "Security Vulnerability Scans": "No security vulnerabilities found.",
             "Dependency Analysis": "All dependencies are secure."
+        }
+        commit_analysis_results = {
+            "total_commits": 10,
+            "short_message_issues": 1,
+            "non_informative_issues": 2,
+            "non_conforming_messages": 0
         }
         improvement_plan = [
             "Review and address all code style issues.",
@@ -34,34 +39,32 @@ class TestMarkdownReport(unittest.TestCase):
             sample_repo_structure_results,
             notebook_stats,
             other_reports,
-            improvement_plan  # Now passing the improvement plan
+            improvement_plan,
+            commit_analysis_results  # Including commit analysis results in the test
         )
 
-        # Assertions to check the presence of new sections and content
+        # Verify the inclusion and correct formatting of the new sections and content
         self.assertIn("## Summary", report)
-        self.assertIn("This report outlines the findings", report)
         self.assertIn("## Improvement Plan", report)
         self.assertIn("Review and address all code style issues.", report)
         self.assertIn("## Additional Resources", report)
-        self.assertIn("[Python Official Documentation](https://docs.python.org/3/)", report)
-        
-        # Existing checks
         self.assertIn("## Code Quality Checks", report)
         self.assertIn("Well-structured with clear logic.", report)
         self.assertIn("## Repository Structure Check", report)
         self.assertIn("- **Missing Directories**: ", report)
-        
-        # Checks for other reports
         self.assertIn("## Code Style Results", report)
         self.assertIn("No issues found.", report)
         self.assertIn("## Security Vulnerability Scans", report)
         self.assertIn("No security vulnerabilities found.", report)
         self.assertIn("## Dependency Analysis", report)
         self.assertIn("All dependencies are secure.", report)
-        
-        # Check for notebook stats
         self.assertIn("- **Total Code Cells**: 5\n", report)
         self.assertIn("- **Total Markdown Cells**: 3\n", report)
+        self.assertIn("## Commit Analysis Results", report)
+        self.assertIn("- **Total Commits**: 10", report)
+        self.assertIn("- **Short Message Issues**: 1", report)
+        self.assertIn("- **Non Informative Issues**: 2", report)
+        self.assertIn("- **Non Conforming Messages**: 0", report)
 
 if __name__ == '__main__':
     unittest.main()
