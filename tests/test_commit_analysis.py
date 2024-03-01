@@ -44,19 +44,15 @@ class TestCommitAnalysis(unittest.TestCase):
         result = analyze_commit_messages('/path/to/repo/with/no/commits')
         self.assertEqual(result, "No commits found in the repository.")
 
-    @patch('os.getenv')
+    @patch('os.getenv', return_value='/mock/repo/path')
     @patch('jupyterquest.commit_analysis.Repo')
     def test_analyze_commit_messages_env_variable(self, mock_repo, mock_getenv):
-        # Setup environment variable mock
-        mock_getenv.return_value = '/mock/repo/path'
-        
-        # Prepare mock commits
-        mock_commit = MagicMock(message='feat: Enhance feature\nDetailed explanation.\n')
-        
-        # Ensure the mock repo iterates over commits correctly
-        mock_repo.return_value.iter_commits = MagicMock(return_value=[mock_commit])
-        
-        # Expected results based on the mock commits
+        # Setup mock commits as needed
+        mock_commit = MagicMock()
+        mock_commit.message = 'feat: Enhance feature\nDetailed explanation.\n'
+        mock_repo.return_value.iter_commits.return_value = [mock_commit]
+
+        # Expected results based on the mocked commits
         expected_result = {
             "total_commits": 1,
             "short_message_issues": 0,
