@@ -36,7 +36,7 @@ class TestSecurityChecks(unittest.TestCase):
         )
         self.assertEqual(result, expected_output)
 
-    @patch('security_checks.run_bandit')
+    @patch('jupyterquest.security_checks.run_bandit')
     def test_check_security_vulnerabilities_multiple_blocks(self, mock_run_bandit):
         # Simulate multiple code blocks with and without issues
         mock_run_bandit.side_effect = [

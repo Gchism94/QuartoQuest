@@ -3,8 +3,8 @@ import glob
 from .repo_structure_check import check_directory_structure
 from .code_quality_check import assess_code_quality
 from .code_style_check import check_code_style
-from .security_checks import check_security_vulnerabilities  # Ensure this matches your actual function name
-from .dependency_checks import check_dependencies  # Ensure this matches your actual function name
+from .security_checks import check_security_vulnerabilities
+from .dependency_checks import check_dependencies
 from .commit_analysis import analyze_commit_messages
 from .parse_ipynb import parse_ipynb
 from .generate_markdown_report import generate_markdown_report, save_markdown_report
