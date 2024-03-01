@@ -28,7 +28,8 @@ dependencies = [
     "nbformat>=5.9.2",
     "requests>=2.25.1",
     "safety>=3.0.1",
-    "pip-audit>=2.7.2"
+    "pip-audit>=2.7.2",
+    "bandit>=1.7.7"
 ]
 
 [project.urls]
