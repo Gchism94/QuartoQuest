@@ -18,8 +18,12 @@ def run_bandit(code_block):
         output_lines = result.stdout.strip().split('\n')
         markdown_output = '\n- '.join(output_lines)
         return "- " + markdown_output
+    elif result.stderr:
+        # Handle potential errors from Bandit more explicitly
+        return f"Error running Bandit: {result.stderr}"
     else:
         return "No security issues found."
+    
 
 def check_security_vulnerabilities(code_blocks):
     """
