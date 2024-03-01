@@ -1,5 +1,6 @@
 import os
 import glob
+import markdown
 from .repo_structure_check import check_directory_structure
 from .code_quality_check import assess_code_quality
 from .code_style_check import check_code_style
@@ -7,12 +8,18 @@ from .security_checks import check_security_vulnerabilities
 from .dependency_checks import check_dependencies
 from .commit_analysis import analyze_commit_messages
 from .parse_ipynb import parse_ipynb
-from .generate_markdown_report import generate_markdown_report, save_markdown_report
+from .generate_markdown_report import generate_markdown_report
 
 def find_first_ipynb_file(repo_path):
     """Finds the first .ipynb file in the given directory."""
     ipynb_files = glob.glob(os.path.join(repo_path, '*.ipynb'))
     return ipynb_files[0] if ipynb_files else None
+
+def save_html_report(html_content, file_path):
+    """Saves the HTML content to a file."""
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)  # Ensure the directory exists
+    with open(file_path, 'w', encoding='utf-8') as f:
+        f.write(html_content)
 
 def main():
     repo_path = os.getenv('GITHUB_WORKSPACE', '.')
@@ -45,14 +52,14 @@ def main():
     print("Commit Analysis Results:", commit_analysis_results)
 
     # 4. Security Checks and Dependency Analysis
-    security_report = check_security_vulnerabilities()  # Assuming no arguments needed, adjust as necessary
+    security_report = check_security_vulnerabilities(code_blocks)  # Pass the code blocks for analysis
     dependency_report = check_dependencies()
 
-    # Prepare other_reports with security and dependency reports
+    # Prepare other reports with security and dependency reports
     other_reports = {
         "Security Vulnerability Scans": security_report,
         "Dependency Analysis": dependency_report,
-        "Commit Analysis Results": "\n".join([f"- {message}" for message in commit_analysis_results])  # Assuming commit_analysis_results can be iterated for individual messages
+        "Commit Analysis Results": "\n".join([f"- {message}" for message in commit_analysis_results])
     }
 
     # Compile all results into a final Markdown report
@@ -68,6 +75,13 @@ def main():
         other_reports=other_reports
     )
 
-    # Save the report as a .md file in the reports directory
-    report_file_path = os.path.join("reports", "autograder_report.md")
-    save_markdown_report(final_report, report_file_path)
+    # Convert Markdown report to HTML
+    final_report_html = markdown.markdown(final_report)
+
+    # Save the report as an .html file in the reports directory
+    report_file_path = os.path.join(repo_path, "reports", "autograder_report.html")
+    save_html_report(final_report_html, report_file_path)
+    print(f"Report saved to {report_file_path}")
+
+if __name__ == '__main__':
+    main()
