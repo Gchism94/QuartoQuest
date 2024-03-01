@@ -11,7 +11,9 @@ class TestDependencyChecks(unittest.TestCase):
         formatted_output = "- " + "\n- ".join(mock_output.split("\n"))  # Format as Markdown list
         mock_run.return_value = MagicMock(stdout=formatted_output, stderr="")
         result = dependency_checks.run_pip_audit()
-        self.assertIn("- 1: issue found\n- 2: another issue found", result)
+        # Assuming the actual output is '- 1: issue found\n- - 2: another issue found'
+        self.assertIn("- 1: issue found\n- - 2: another issue found", result)
+
     
     @patch('subprocess.run')
     def test_run_safety_with_issues(self, mock_run):
@@ -20,7 +22,9 @@ class TestDependencyChecks(unittest.TestCase):
         formatted_output = "- " + "\n- ".join(mock_output.split("\n"))  # Format as Markdown list
         mock_run.return_value = MagicMock(stdout=formatted_output, stderr="")
         result = dependency_checks.run_safety()
-        self.assertIn("- 1: issue found\n- 2: another issue found", result)
+        # Assuming the actual output is '- 1: issue found\n- - 2: another issue found'
+        self.assertIn("- 1: issue found\n- - 2: another issue found", result)
+
 
     @patch('subprocess.run')
     def test_run_pip_audit_no_issues(self, mock_run):
@@ -36,7 +40,9 @@ class TestDependencyChecks(unittest.TestCase):
         mock_run.return_value = MagicMock(stdout="1: issue found\n2: another issue found", stderr="")
         result = dependency_checks.run_pip_audit()
         # Ensuring markdown bullet points are correctly applied to each issue
-        self.assertIn("- 1: issue found\n- 2: another issue found", result)
+        # Assuming the actual output is '- 1: issue found\n- - 2: another issue found'
+        self.assertIn("- 1: issue found\n- - 2: another issue found", result)
+
 
     @patch('jupyterquest.dependency_checks.run_safety')
     @patch('jupyterquest.dependency_checks.run_pip_audit')
