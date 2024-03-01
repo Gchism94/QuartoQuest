@@ -18,26 +18,23 @@ def analyze_commit_messages(repo_path):
     except (InvalidGitRepositoryError, NoSuchPathError) as e:
         return f"Error with the repository: {str(e)}"
 
-    branch = 'main'
-    try:
-        commits = list(repo.iter_commits(branch))
-    except ValueError:
-        return f"No such branch: '{branch}'."
+    # Get all commits from all branches
+    all_commits = []
+    for ref in repo.references:
+        if ref.commit not in all_commits:
+            all_commits.extend(list(repo.iter_commits(ref)))
 
-    if not commits:
-        return "No commits found in the branch."
+    if not all_commits:
+        return "No commits found in the repository."
 
     short_message_issues = 0
     non_informative_issues = 0
     non_conforming_messages = 0
 
-    # Define non-informative keywords based on common practices.
     non_informative_keywords = ['fix', 'update', 'minor', 'misc', 'changes']
-
-    # Regular expression for structured commit messages, e.g., "TYPE: Description".
     structured_message_pattern = re.compile(r"^(feat|fix|docs|style|refactor|perf|test|chore):\s.+")
 
-    for commit in commits:
+    for commit in all_commits:
         first_line = commit.message.strip().split('\n', 1)[0]
         if len(first_line) < 10:
             short_message_issues += 1
@@ -47,13 +44,13 @@ def analyze_commit_messages(repo_path):
             non_conforming_messages += 1
 
     return {
-        "total_commits": len(commits),
+        "total_commits": len(all_commits),
         "short_message_issues": short_message_issues,
         "non_informative_issues": non_informative_issues,
         "non_conforming_messages": non_conforming_messages
     }
 
 if __name__ == "__main__":
-    repo_path = '/path/to/your/repo'  # Adjust as necessary.
+    repo_path = '/path/to/your/repo'
     commit_analysis_result = analyze_commit_messages(repo_path)
     print(commit_analysis_result)
