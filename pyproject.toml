@@ -30,4 +30,5 @@ dependencies = [
 ]
 
 [project.urls]
-Home = "https://github.com/Gchism94/jupyterquest"
+Source = "https://github.com/Gchism94/jupyterquest"
+Tracker = "https://github.com/Gchism94/jupyterquest/issues"
