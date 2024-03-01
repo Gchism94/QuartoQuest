@@ -1,6 +1,7 @@
 import os
 import glob
 import markdown
+from markdown.extensions.tables import TableExtension
 from .repo_structure_check import check_directory_structure
 from .code_quality_check import assess_code_quality
 from .code_style_check import check_code_style
@@ -20,6 +21,50 @@ def save_html_report(html_content, file_path):
     os.makedirs(os.path.dirname(file_path), exist_ok=True)  # Ensure the directory exists
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write(html_content)
+
+def generate_html_with_css(markdown_content):
+    """Generates HTML content with CSS styling from Markdown content."""
+    css_styles = """
+    <style>
+    body {
+        font-family: Segoe UI, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+    }
+    h1, h2, h3 {
+        color: #333;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    table, th, td {
+        border: 1px solid #dddddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    pre {
+        background-color: #f4f4f4;
+        border: 1px solid #ddd;
+        padding: 10px;
+        overflow: auto;
+    }
+    .critical {
+        color: red;
+    }
+    </style>
+    """
+
+    # Convert Markdown to HTML
+    html_content = markdown.markdown(markdown_content, extensions=[TableExtension()])
+
+    # Combine CSS and HTML content
+    styled_html = css_styles + html_content
+
+    return styled_html
 
 def main():
     repo_path = os.getenv('GITHUB_WORKSPACE', '.')
@@ -76,7 +121,8 @@ def main():
     )
 
     # Convert Markdown report to HTML
-    final_report_html = markdown.markdown(final_report)
+    final_report_html = generate_html_with_css(final_report)
+
 
     # Save the report as an .html file in the reports directory
     report_file_path = os.path.join(repo_path, "reports", "autograder_report.html")
