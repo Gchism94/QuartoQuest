@@ -26,8 +26,7 @@ dependencies = [
     "pytest>=6.2.5",
     "jupyter>=1.0.0",
     "nbformat>=5.9.2",
-    "requests>=2.25.1",
-    "json>=3.12.2"
+    "requests>=2.25.1"
 ]
 
 [project.urls]
