@@ -1,5 +1,8 @@
 # jupyterquest: The Advanced .ipynb Autograder
 
+![License](https://img.shields.io/badge/license-MIT-green)
+![Version](https://img.shields.io/badge/version-0.2.0-blue)
+
 ## Overview
 **jupyterquest** is a comprehensive autograding tool designed to elevate the standard of Jupyter Notebook (.ipynb) submissions. Seamlessly integrated with GitHub Actions, it provides an automated evaluation process that spans across code style, structure, commit history, security vulnerabilities, and dependency checks. This tool is invaluable for educators, mentors, and development teams aiming to uphold best practices in code quality, security, and project organization.
 
