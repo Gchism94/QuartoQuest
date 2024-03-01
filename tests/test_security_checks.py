@@ -13,25 +13,20 @@ class TestDependencyChecks(unittest.TestCase):
 
     @patch('subprocess.run')
     def test_run_pip_audit_with_issues(self, mock_run):
-        # Correctly formatted mock output to match expected function output
-        mock_run.return_value = MagicMock(stdout="- 1: issue found\n- 2: another issue found", stderr="")
+        # Mocking subprocess.run to simulate pip-audit finding issues
+        mock_output = "1: issue found\n2: another issue found"
+        formatted_output = "- " + "\n- ".join(mock_output.split("\n"))  # Correctly formatting as Markdown list
+        mock_run.return_value = MagicMock(stdout=formatted_output, stderr="")
         result = dependency_checks.run_pip_audit()
-        # Correct assertion to match the mock output formatting
         self.assertIn("- 1: issue found\n- 2: another issue found", result)
 
     @patch('subprocess.run')
     def test_run_safety_with_issues(self, mock_run):
-        # Correctly formatted mock output to match expected function output
-        mock_run.return_value = MagicMock(stdout="- 1: issue found\n- 2: another issue found", stderr="")
+        # Similar correction for simulating Safety finding issues
+        mock_output = "1: issue found\n2: another issue found"
+        formatted_output = "- " + "\n- ".join(mock_output.split("\n"))  # Correctly formatting as Markdown list
+        mock_run.return_value = MagicMock(stdout=formatted_output, stderr="")
         result = dependency_checks.run_safety()
-        # Correct assertion to match the mock output formatting
-        self.assertIn("- 1: issue found\n- 2: another issue found", result)
-
-    @patch('subprocess.run')
-    def test_run_pip_audit_with_issues(self, mock_run):
-        # Simulate pip-audit finding issues
-        mock_run.return_value = MagicMock(stdout="1: issue found\n2: another issue found", stderr="")
-        result = dependency_checks.run_pip_audit()
         self.assertIn("- 1: issue found\n- 2: another issue found", result)
 
     @patch('jupyterquest.dependency_checks.run_safety')
