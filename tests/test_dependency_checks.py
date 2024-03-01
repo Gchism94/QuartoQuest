@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from dependency_checks import run_safety, run_pip_audit, check_dependencies  # Adjust the import path as needed
+from jupyterquest.dependency_checks import run_safety, run_pip_audit, check_dependencies  # Adjust the import path as needed
 
 class TestDependencyChecks(unittest.TestCase):
 
