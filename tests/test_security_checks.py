@@ -1,4 +1,5 @@
 import unittest
+import json
 from unittest.mock import patch, MagicMock
 from jupyterquest.security_checks import run_bandit, check_security_vulnerabilities
 
