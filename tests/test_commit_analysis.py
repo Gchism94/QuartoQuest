@@ -43,9 +43,10 @@ class TestCommitAnalysis(unittest.TestCase):
 
     @patch('os.getenv', return_value='/mock/repo/path')
     @patch('jupyterquest.commit_analysis.Repo')
-    def test_analyze_commit_messages_env_variable(self, mock_repo, mock_getenv):
+    def test_analyze_commit_messages_env_variable(self, mock_repo):
         # Setup mock commits
-        mock_commit = MagicMock(message='feat: Enhance feature\nDetailed explanation.\n', hexsha='def')
+        mock_commit = MagicMock(message='feat: Enhance feature\nDetailed explanation.\n', hexsha='def', author=MagicMock(name='SomeUser'))
+        # Simulate iter_commits returning these commits
         mock_repo.return_value.iter_commits = MagicMock(return_value=[mock_commit])
 
         expected_result = {
