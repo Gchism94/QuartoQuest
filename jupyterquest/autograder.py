@@ -26,19 +26,37 @@ def generate_html_with_css(markdown_content):
     """Generates HTML content with CSS styling from Markdown content."""
     css_styles = """
     <style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
+
     body {
-        font-family: Segoe UI, sans-serif;
+        font-family: 'Open Sans', sans-serif;
         line-height: 1.6;
-        margin: 20px;
-    }
-    h1, h2, h3 {
+        margin: 30px;
         color: #333;
+        background-color: #fff;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Montserrat', sans-serif;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-weight: 700;
+    }
+    p, ul, ol, table, pre {
+        margin-bottom: 20px;
+    }
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
     }
     table {
-        width: 100%;
         border-collapse: collapse;
+        width: 100%;
     }
-    table, th, td {
+    th, td {
         border: 1px solid #dddddd;
         padding: 8px;
         text-align: left;
@@ -52,8 +70,12 @@ def generate_html_with_css(markdown_content):
         padding: 10px;
         overflow: auto;
     }
-    .critical {
-        color: red;
+    code {
+        font-family: 'Open Sans', monospace;
+        background-color: #f4f4f4;
+        padding: 2px 4px;
+        font-size: 90%;
+        border-radius: 3px;
     }
     </style>
     """
@@ -65,6 +87,7 @@ def generate_html_with_css(markdown_content):
     styled_html = css_styles + html_content
 
     return styled_html
+
 
 def main():
     repo_path = os.getenv('GITHUB_WORKSPACE', '.')

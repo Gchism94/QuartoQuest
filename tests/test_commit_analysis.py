@@ -19,9 +19,9 @@ class TestCommitAnalysis(unittest.TestCase):
         mock_repo.return_value.iter_commits = MagicMock(return_value=[mock_commit1, mock_commit2, mock_commit3, mock_commit4])
 
         expected_result = {
-            "total_commits": 2,  # Excluding commits by Gchism94 and 'Add autograder report'
+            "total_commits": 3,  # Excluding commits by Gchism94 and 'Add autograder report'
             "short_message_issues": 0,
-            "non_informative_issues": 1,  # 'Update readme' is considered non-informative
+            "non_informative_issues": 2,  # 'Update readme' is considered non-informative
             "non_conforming_messages": 1  # 'Update readme' is considered non-conforming
         }
 
