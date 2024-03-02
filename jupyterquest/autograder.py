@@ -128,7 +128,6 @@ def main():
         repo_structure_results=repo_structure_results,
         notebook_stats=notebook_stats,
         commit_analysis_results=commit_analysis_results,
-        other_reports=other_reports
     )
 
     # Convert Markdown report to HTML
