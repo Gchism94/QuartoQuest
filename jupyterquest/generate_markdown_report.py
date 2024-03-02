@@ -89,6 +89,5 @@ if __name__ == "__main__":
         sample_repo_structure_results,
         sample_notebook_stats,
         sample_commit_analysis_results,
-        other_reports,
         improvement_plan
     )

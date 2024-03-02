@@ -10,7 +10,19 @@ def assess_code_complexity(code):
         return "Invalid input: Code must be a string"
     try:
         complexities = cc_visit(code)
-        return [(item.name, item.complexity, cc_rank(item.complexity)) for item in complexities]
+        results = []
+        for item in complexities:
+            rank = cc_rank(item.complexity)
+            rank_description = {
+                'A': 'Simple - Excellent',
+                'B': 'Well-structured - Good',
+                'C': 'Slightly Complex - Moderate',
+                'D': 'More Complex - Concerning',
+                'E': 'Complex - Poor',
+                'F': 'Very Complex - Troubling'
+            }.get(rank, 'Unknown')
+            results.append(f"{item.name}: Complexity {item.complexity}, Rank {rank} ({rank_description})")
+        return '\n'.join(results) if results else "No functions/methods to assess."
     except Exception as e:
         return f"Error assessing complexity: {str(e)}"
 
@@ -25,7 +37,7 @@ def assess_code_structure(code):
         tree = ast.parse(code)
         functions = [node for node in ast.walk(tree) if isinstance(node, ast.FunctionDef)]
         num_functions = len(functions)
-        return f"Number of functions: {num_functions}"
+        return f"Number of functions: {num_functions}, indicating {'a simple structure' if num_functions <= 3 else 'a potentially complex structure'}."
     except SyntaxError as e:
         return f"Syntax error in code: {str(e)}"
 
@@ -54,11 +66,10 @@ def assess_code_quality(code_blocks):
 if __name__ == "__main__":
     sample_code_blocks = [
         "def example_function(x):\n    return x * x\n",  # Sample code block
-        # ... other code blocks
+        # Additional code blocks...
     ]
     code_quality_results = assess_code_quality(sample_code_blocks)
     for block, results in code_quality_results.items():
         print(f"{block} Results:")
-        for key, value in results.items():
-            print(f"{key}: {value}")
-        print()  # Newline for readability
+        print(f"Complexity:\n{results['Complexity']}")
+        print(f"Structure:\n{results['Structure']}\n")
