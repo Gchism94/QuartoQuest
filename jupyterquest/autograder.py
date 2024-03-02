@@ -5,7 +5,6 @@ from markdown.extensions.tables import TableExtension
 from .repo_structure_check import check_directory_structure
 from .code_quality_check import assess_code_quality
 from .code_style_check import check_code_style
-from .dependency_checks import check_dependencies
 from .commit_analysis import analyze_commit_messages
 from .parse_ipynb import parse_ipynb
 from .generate_markdown_report import generate_markdown_report
@@ -31,7 +30,7 @@ def generate_html_with_css(markdown_content):
     body {
         font-family: 'Open Sans', sans-serif;
         line-height: 1.6;
-        margin: 30px;
+        margin: 50px;
         color: #333;
         background-color: #fff;
     }
@@ -117,14 +116,6 @@ def main():
     # 3. Commit Analysis
     commit_analysis_results = analyze_commit_messages(repo_path)
     print("Commit Analysis Results:", commit_analysis_results)
-
-    # 4. Dependency Analysis
-    dependency_report = check_dependencies()
-
-    # Prepare other reports with dependency reports
-    other_reports = {
-        "Dependency Analysis": dependency_report
-    }
 
     # Compile all results into a final Markdown report
     notebook_stats = {

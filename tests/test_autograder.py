@@ -12,7 +12,6 @@ class TestAutograder(unittest.TestCase):
     @patch('jupyterquest.autograder.assess_code_quality', return_value={'Code Block 1': {'Complexity': 'Low', 'Structure': 'Good'}})
     @patch('jupyterquest.autograder.check_code_style', return_value=['No issues found.'])
     @patch('jupyterquest.autograder.analyze_commit_messages', return_value={'total_commits': 1, 'short_message_issues': 0, 'non_informative_issues': 0, 'non_conforming_messages': 1})
-    @patch('jupyterquest.autograder.check_dependencies', return_value='All dependencies are secure.')
     @patch('jupyterquest.autograder.generate_html_with_css')
     @patch('builtins.open', new_callable=unittest.mock.mock_open)  # Mock the built-in open function
     def test_main_integration(self, mock_open, mock_generate_html, mock_check_deps, mock_analyze_commits, mock_check_style, mock_assess_quality, mock_parse, mock_check_structure, mock_glob, mock_getenv):

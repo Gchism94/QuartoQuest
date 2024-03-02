@@ -9,4 +9,5 @@ __pycache__/
 *.pyc
 .DS_Store  # for macOS users
 test_security_checks_inactive.py
+test_dependency_checks_inactive.py
 venv/*

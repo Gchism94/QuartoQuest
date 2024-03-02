@@ -8,7 +8,6 @@ def generate_markdown_report(quality_reports, repo_structure_results, notebook_s
     :param repo_structure_results: Dictionary of repository structure results.
     :param notebook_stats: Dictionary of notebook statistics.
     :param commit_analysis_results: Dictionary of commit analysis results.
-    :param other_reports: Dictionary of other reports (e.g., dependency checks).
     :param improvement_plan: List of improvement actions.
     :return: Markdown formatted report as a string.
     """
@@ -38,12 +37,6 @@ def generate_markdown_report(quality_reports, repo_structure_results, notebook_s
         for key, value in commit_analysis_results.items():
             report_md += f"- **{key.replace('_', ' ').title()}**: {value}\n"
         report_md += "\n"
-
-
-    # Other Reports
-    if other_reports:
-        for title, content in other_reports.items():
-            report_md += f"## {title}\n\n{content}\n\n"
 
 
     # Improvement Plan
@@ -85,14 +78,9 @@ if __name__ == "__main__":
         "non_conforming_messages": 2
     }
 
-    other_reports = {
-        "Dependency Analysis": "All dependencies are secure.",
-    }
-
     improvement_plan = [
         "Review and address all code style issues.",
         "Reduce complexity in high-complexity functions.",
-        "Ensure all dependencies are up-to-date and secure.",
     ]
 
     # Generate the report
