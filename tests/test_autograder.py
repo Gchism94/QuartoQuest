@@ -13,7 +13,7 @@ class TestAutograder(unittest.TestCase):
     @patch('jupyterquest.autograder.analyze_commit_messages', return_value={'total_commits': 1, 'short_message_issues': 0, 'non_informative_issues': 0, 'non_conforming_messages': 1})
     @patch('jupyterquest.autograder.generate_html_with_css')
     @patch('builtins.open', new_callable=unittest.mock.mock_open)  # Mock the built-in open function 
-    def test_main_integration(self, mock_open, mock_generate_html, mock_check_deps, mock_analyze_commits, mock_check_style, mock_assess_quality, mock_parse, mock_check_structure, mock_glob, mock_getenv):
+    def test_main_integration(self, mock_open, mock_generate_html, mock_analyze_commits, mock_check_style, mock_assess_quality, mock_parse, mock_check_structure, mock_glob, mock_getenv):
         # Setup mocks
         mock_generate_html.return_value = '<html>Mocked HTML Content</html>'
 
