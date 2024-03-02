@@ -1,5 +1,5 @@
 import unittest
-from jupyterquest import assess_code_complexity, assess_code_structure, assess_code_quality
+from jupyterquest.code_quality_check import assess_code_complexity, assess_code_structure, assess_code_quality
 
 class TestCodeQualityCheck(unittest.TestCase):
     def test_assess_code_complexity_valid_input(self):
