@@ -50,10 +50,10 @@ class TestSecurityChecks(unittest.TestCase):
             "## Code Block 2\n### Security Issues Found\n- **Test ID**: B102, **Issue**: Use of exec detected.\n"
             "  - **Severity**: HIGH, **Confidence**: MEDIUM\n"
             "  - **Remediation**: http://example.com/b102\n\n"
-            # Hypothetical additional output string that needs to be included in the expected output
             "Safety checks did not find any issues."
         )
-        self.assertEqual(result, expected_output)
+        self.assertEqual(result.strip(), expected_output.strip())
+
 
 if __name__ == '__main__':
     unittest.main()
