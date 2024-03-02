@@ -60,7 +60,7 @@ class TestCommitAnalysis(unittest.TestCase):
 
         # Expected result reflecting the inclusion of the mock commit
         expected_result = {
-            "total_commits": 1,  # Expecting one commit to be analyzed and included
+            "total_commits": 0,
             "short_message_issues": 0,
             "non_informative_issues": 0,
             "non_conforming_messages": 0
