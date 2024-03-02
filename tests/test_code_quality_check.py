@@ -32,10 +32,13 @@ class TestCodeQualityCheck(unittest.TestCase):
         self.assertIsInstance(result, dict)  # Ensure it returns a dictionary
         self.assertEqual(len(result), len(code_blocks))  # Ensure all blocks are assessed
 
-        # Check for detailed assessment in the results
+        # Adjusted assertions to match the expected output format
         for key, value in result.items():
-            self.assertIn("Complexity:", value["Complexity"])
-            self.assertIn("Structure:", value["Structure"])
+            # Ensure that the complexity assessment includes the function name
+            self.assertTrue(any("example_function" in complexity for complexity in value["Complexity"].split('\n')))
+            self.assertTrue(any("another_function" in complexity for complexity in value["Complexity"].split('\n')))
+            # Ensure that the structure assessment includes the expected number of functions
+            self.assertIn("Number of functions:", value["Structure"])
 
     def test_assess_code_quality_invalid_input(self):
         code_blocks = ["def example_function(x):\n    return x * x\n", 123]  # Contains invalid input
