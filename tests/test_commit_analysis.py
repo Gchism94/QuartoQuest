@@ -51,25 +51,25 @@ class TestCommitAnalysis(unittest.TestCase):
     @patch('os.getenv', return_value='/mock/repo/path')
     @patch('jupyterquest.commit_analysis.Repo')
     def test_analyze_commit_messages_env_variable(self, mock_repo, mock_getenv):
-        # Setup mock commits with explicit authorship and commit messages
-        mock_commit = MagicMock()
-        mock_commit.message = 'feat: Enhance feature\nDetailed explanation.\n'
-        mock_commit.hexsha = 'def'
-        mock_commit.author.name = 'SomeUser'
+        # Setup mock commit with specific conditions to be included in the count
+        mock_commit = MagicMock(message='feat: Enhance feature\nDetailed explanation.\n', hexsha='unique_hexsha')
+        mock_commit.author.name = 'ExpectedAuthor'
 
-        # Ensure the mock Repo's iter_commits method returns a list containing the mock commit
+        # Ensure the mock Repo's iter_commits method yields this mock commit
         mock_repo.return_value.iter_commits.return_value = [mock_commit]
 
+        # Expected result reflecting the inclusion of the mock commit
         expected_result = {
-            "total_commits": 1,  # Expecting one commit to be analyzed
+            "total_commits": 1,  # Expecting one commit to be analyzed and included
             "short_message_issues": 0,
             "non_informative_issues": 0,
             "non_conforming_messages": 0
         }
 
-        # Call the function under test with the mocked environment variable's repo path
+        # Invoke the function under test and verify the outcome
         result = analyze_commit_messages(os.getenv('GITHUB_WORKSPACE'))
         self.assertEqual(result, expected_result)
+
 
 
 if __name__ == '__main__':
