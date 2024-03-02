@@ -1,6 +1,7 @@
 import subprocess
 import tempfile
 import json
+import os
 
 def run_bandit(code_block):
     """
