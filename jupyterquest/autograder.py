@@ -5,7 +5,6 @@ from markdown.extensions.tables import TableExtension
 from .repo_structure_check import check_directory_structure
 from .code_quality_check import assess_code_quality
 from .code_style_check import check_code_style
-from .security_checks import check_security_vulnerabilities
 from .dependency_checks import check_dependencies
 from .commit_analysis import analyze_commit_messages
 from .parse_ipynb import parse_ipynb
@@ -119,13 +118,11 @@ def main():
     commit_analysis_results = analyze_commit_messages(repo_path)
     print("Commit Analysis Results:", commit_analysis_results)
 
-    # 4. Security Checks and Dependency Analysis
-    security_report = check_security_vulnerabilities(code_blocks)  # Pass the code blocks for analysis
+    # 4. Dependency Analysis
     dependency_report = check_dependencies()
 
-    # Prepare other reports with security and dependency reports
+    # Prepare other reports with dependency reports
     other_reports = {
-        "Security Vulnerability Scans": security_report,
         "Dependency Analysis": dependency_report
     }
 

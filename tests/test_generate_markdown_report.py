@@ -20,7 +20,6 @@ class TestMarkdownReport(unittest.TestCase):
         }
         other_reports = {
             "Code Style Results": "No issues found.",
-            "Security Vulnerability Scans": "No security vulnerabilities found.",
             "Dependency Analysis": "All dependencies are secure."
         }
         commit_analysis_results = {

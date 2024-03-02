@@ -8,7 +8,7 @@ def generate_markdown_report(quality_reports, repo_structure_results, notebook_s
     :param repo_structure_results: Dictionary of repository structure results.
     :param notebook_stats: Dictionary of notebook statistics.
     :param commit_analysis_results: Dictionary of commit analysis results.
-    :param other_reports: Dictionary of other reports (e.g., security, dependency checks).
+    :param other_reports: Dictionary of other reports (e.g., dependency checks).
     :param improvement_plan: List of improvement actions.
     :return: Markdown formatted report as a string.
     """
@@ -86,7 +86,6 @@ if __name__ == "__main__":
     }
 
     other_reports = {
-        "Security Vulnerability Scans": "No security vulnerabilities found.",
         "Dependency Analysis": "All dependencies are secure.",
     }
 
