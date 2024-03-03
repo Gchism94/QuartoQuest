@@ -24,21 +24,22 @@ class TestCodeQualityCheck(unittest.TestCase):
         self.assertTrue("Syntax error in code:" in result)
 
     def test_assess_code_quality(self):
+        # Revised to include a slightly more complex function, if necessary
         code_blocks = [
             "def example_function(x):\n    return x * x\n",
-            "def another_function():\n    pass\n"
+            "def another_function(y):\n    if y > 0:\n        return y\n    else:\n        return -y\n"
         ]
         result = assess_code_quality(code_blocks)
-        self.assertIsInstance(result, dict)  # Ensure it returns a dictionary
-        self.assertEqual(len(result), len(code_blocks))  # Ensure all blocks are assessed
+        self.assertIsInstance(result, dict)
+        self.assertEqual(len(result), len(code_blocks))
 
-        # Adjusted assertions to match the expected output format
         for key, value in result.items():
-            # Ensure that the complexity assessment includes the function name
-            self.assertTrue(any("example_function" in complexity for complexity in value["Complexity"].split('\n')))
-            self.assertTrue(any("another_function" in complexity for complexity in value["Complexity"].split('\n')))
-            # Ensure that the structure assessment includes the expected number of functions
+            # Check for presence of function names in the complexity report
+            self.assertIn("example_function", value["Complexity"])
+            self.assertIn("another_function", value["Complexity"])  # Adjusted based on the actual implementation
+            # Check the structure report
             self.assertIn("Number of functions:", value["Structure"])
+
 
     def test_assess_code_quality_invalid_input(self):
         code_blocks = ["def example_function(x):\n    return x * x\n", 123]  # Contains invalid input
