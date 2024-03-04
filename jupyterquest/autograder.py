@@ -89,6 +89,7 @@ def generate_html_with_css(markdown_content):
 
 def main():
     repo_path = os.getenv('GITHUB_WORKSPACE', '.')
+    reports_dir = os.path.join(repo_path, "reports")  
 
     # 1. Check Repository Structure
     required_directories = ['data', 'images']
@@ -135,7 +136,7 @@ def main():
 
 
     # Save the report as an .html file in the reports directory
-    report_file_path = os.path.join(repo_path, "reports", "autograder_report.html")
+    report_file_path = os.path.join(reports_dir, "autograder_report.html")
     save_html_report(final_report_html, report_file_path)
     print(f"Report saved to {report_file_path}")
 

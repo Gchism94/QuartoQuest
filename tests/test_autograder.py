@@ -12,7 +12,7 @@ class TestAutograder(unittest.TestCase):
     @patch('jupyterquest.autograder.check_code_style', return_value=['No issues found.'])
     @patch('jupyterquest.autograder.analyze_commit_messages', return_value={'total_commits': 1, 'short_message_issues': 0, 'non_informative_issues': 0, 'non_conforming_messages': 1})
     @patch('jupyterquest.autograder.generate_html_with_css')
-    @patch('builtins.open', new_callable=unittest.mock.mock_open)  # Mock the built-in open function 
+    @patch('builtins.open', new_callable=unittest.mock.mock_open)  # Mock the built-in open function
     def test_main_integration(self, mock_open, mock_generate_html, mock_analyze_commits, mock_check_style, mock_assess_quality, mock_parse, mock_check_structure, mock_glob, mock_getenv):
         # Setup mocks
         mock_generate_html.return_value = '<html>Mocked HTML Content</html>'
@@ -20,9 +20,10 @@ class TestAutograder(unittest.TestCase):
         # Call the main function
         main()
 
-        # Verify that the correct path was used to save the HTML report
-        report_path = os.path.join('.', "reports", "autograder_report.html")
-        mock_open.assert_called_with(report_path, 'w', encoding='utf-8')
+        # Assuming the GITHUB_WORKSPACE environment variable would be set to '.'
+        # Adjust the report path to reflect the direct saving in the 'reports' directory
+        expected_report_path = os.path.join('.', "reports", "autograder_report.html")
+        mock_open.assert_called_with(expected_report_path, 'w', encoding='utf-8')
         
         # Verify the HTML content generation call
         mock_generate_html.assert_called()
