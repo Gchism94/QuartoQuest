@@ -2,7 +2,7 @@
 
 | Category | Badges |
 | --- | --- |
-| Testing | [![GitHub Workflow Status](https://github.com/Gchism94/jupyterquest/actions/workflows/autograder.yml/badge.svg)](https://github.com/Gchism94/jupyterquest/actions/workflows/autograder.yml) |
+| Testing | [![GitHub Workflow Status](https://github.com/Gchism94/jupyterquest/actions/workflows/python-tests.yml/badge.svg)](https://github.com/Gchism94/jupyterquest/actions/workflows/autograder.yml) |
 | License | [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE) |
 | Version | [![Version](https://img.shields.io/badge/version-0.2.0-blue)](#) |
 
