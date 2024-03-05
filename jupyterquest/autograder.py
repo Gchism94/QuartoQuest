@@ -1,6 +1,7 @@
 import os
 import glob
 import markdown
+from datetime import datetime
 from markdown.extensions.tables import TableExtension
 from .repo_structure_check import check_directory_structure
 from .code_quality_check import assess_code_quality
@@ -83,7 +84,10 @@ def generate_html_with_css(markdown_content):
     }
     </style>
     """
-    # Semantic HTML structure
+    # Get the current date and time
+    current_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+    # Semantic HTML structure with the current date and time
     html_structure = """
     <header>
         <h1>Autograder Report</h1>
@@ -95,7 +99,7 @@ def generate_html_with_css(markdown_content):
         <p>Generated on: {date}</p>
     </footer>
     """.format(content=markdown.markdown(markdown_content, extensions=[TableExtension()]),
-               date=os.path.getmtime("autograder_report.html"))
+               date=current_datetime)
 
     # Combine CSS and HTML content
     styled_html = css_styles + html_structure
