@@ -34,7 +34,7 @@ def generate_html_with_css(markdown_content):
         margin: 50px;
         color: #333;
         background-color: #fff;
-        font-size: 18px; /* Increased font size */
+        font-size: 20px;
     }
     header, section, footer {
         margin-bottom: 40px;
@@ -111,8 +111,8 @@ def main():
     reports_dir = os.path.join(repo_path, "docs")  
 
     # 1. Check Repository Structure
-    required_directories = ['data', 'images']
-    allowed_files_patterns = ['README.md', '.gitignore', 'LICENSE', 'requirements.txt', '*.ipynb', '*.py', 'docs/*']
+    required_directories = ['data', 'images', 'docs']
+    allowed_files_patterns = ['README.md', '.gitignore', 'LICENSE', 'requirements.txt', '*.ipynb', '*.py', 'docs/*', 'hw*']
     repo_structure_results = check_directory_structure(
         repo_path, required_directories, allowed_files_patterns
     )
