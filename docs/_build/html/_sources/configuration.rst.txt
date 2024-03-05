@@ -1,0 +1,84 @@
+.. _configuration:
+
+Configuration
+==========================
+
+The JupyterQuest Autograder is designed to automatically grade Jupyter notebooks using GitHub Actions. This section will guide you through setting up and configuring the autograder for your assignments.
+
+Prerequisites
+-------------
+
+Before configuring the autograder, ensure you have:
+
+- A GitHub repository with the recommended structure. See :ref:`github-repository-structure`.
+- GitHub Actions enabled for your repository.
+
+Creating the GitHub Actions Workflow
+------------------------------------
+
+1. Navigate to the `.github/workflows` directory in your repository. If this directory does not exist, create it.
+2. Create a new YAML file for the autograder workflow, e.g., `autograder.yml`.
+3. Copy and paste the following configuration into your `autograder.yml` file, adjusting parameters as needed:
+
+.. code-block:: yaml
+
+    name: Use Autograder Package
+    on: [push]
+
+    jobs:
+      run-autograder:
+        runs-on: ubuntu-latest
+        permissions:
+          contents: write
+        steps:
+          - uses: actions/checkout@v2
+            with:
+              token: ${{ secrets.GITHUB_TOKEN }}
+              fetch-depth: 0
+              ref: main 
+
+          - name: Set up Python
+            uses: actions/setup-python@v2
+            with:
+              python-version: '3.8'
+
+          - name: Install Dependencies
+            run: |
+              python -m pip install --upgrade pip
+              pip install git+https://github.com/Gchism94/jupyterquest.git
+
+          - name: Run Autograder
+            run: python -m jupyterquest.autograder
+
+          - name: Store Autograder Report Temporarily
+            run: cp ${{ github.workspace }}/docs/autograder_report.html ${{ runner.temp }}/autograder_report.html
+
+          - name: Switch to gh-pages Branch
+            run: |
+              git fetch origin gh-pages:gh-pages || git checkout --orphan gh-pages
+              git reset --hard
+              git checkout gh-pages
+
+          - name: Copy Autograder Report to gh-pages
+            run: |
+              mkdir -p docs
+              cp ${{ runner.temp }}/autograder_report.html ./docs/index.html
+
+          - name: Commit and Push Autograder Report to gh-pages Branch
+            run: |
+              git config --global user.name 'GitHub Actions'
+              git config --global user.email 'actions@github.com'
+              git add ./docs/index.html
+              git commit -m "Publish Autograder Report to gh-pages" || echo "No changes to commit"
+              git push origin gh-pages --force
+            env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+4. Commit and push your changes to GitHub.
+
+This workflow will trigger the autograder every time a push is made to the repository. It will install the required dependencies, run the autograder, and then publish the resulting report to the `gh-pages` branch of your repository.
+
+Next Steps
+----------
+
+After configuring the autograder, consider exploring additional customization options, such as modifying grading criteria or integrating with external tools for enhanced feedback. Ensure your notebooks and repository are prepared for grading, following the guidelines in the previous documentation sections.

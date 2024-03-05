@@ -1,0 +1,10 @@
+/* custom.css */
+.navbar-brand img {
+    width: 50%;   /* Adjust width as needed */
+    height: auto;   /* Keeps the aspect ratio */
+}
+
+/* Hide sidebar navigation */
+.bd-sidebar-primary {
+    display: none;
+}
