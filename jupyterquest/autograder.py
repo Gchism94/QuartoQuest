@@ -73,7 +73,7 @@ def generate_html_with_css(markdown_content):
         overflow: auto;
     }
     code {
-        font-family: 'Open Sans', monospace;
+        font-family: 'Roboto', monospace;
         padding: 2px 4px;
         font-size: 90%;
         border-radius: 3px;
@@ -84,10 +84,8 @@ def generate_html_with_css(markdown_content):
     }
     </style>
     """
-    # Get the current date and time
     current_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-    # Semantic HTML structure with the current date and time
     html_structure = """
     <header>
         <h1>Autograder Report</h1>
@@ -98,14 +96,10 @@ def generate_html_with_css(markdown_content):
     <footer>
         <p>Generated on: {date}</p>
     </footer>
-    """.format(content=markdown.markdown(markdown_content, extensions=[TableExtension()]),
-               date=current_datetime)
+    """.format(content=markdown.markdown(markdown_content, extensions=[TableExtension()]), date=current_datetime)
 
-    # Combine CSS and HTML content
     styled_html = css_styles + html_structure
-
     return styled_html
-
 
 
 def main():
