@@ -33,11 +33,10 @@ html_theme_options = {
         {"name": "GitHub", "url": "https://github.com/Gchism94/jupyterquest"},
     ],
     "logo": {
-        "image_light": "_static/logo-light.png",
-        "image_dark": "_static/logo-dark.png",
+        "image_light": "logo-light.png",
+        "image_dark": "logo-dark.png",
     },
 }
-html_static_path = ['_static']
 html_css_files = [
     'custom.css',
 ]
