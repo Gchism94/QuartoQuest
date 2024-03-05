@@ -21,21 +21,24 @@ def save_html_report(html_content, file_path):
         f.write(html_content)
 
 def generate_html_with_css(markdown_content):
-    """Generates HTML content with CSS styling from Markdown content."""
+    """Generates HTML content with CSS styling from Markdown content, enhanced with semantic HTML and a footer."""
     css_styles = """
     <style>
-    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
-    @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap');
 
     body {
-        font-family: 'Open Sans', sans-serif;
+        font-family: 'Roboto', sans-serif;
         line-height: 1.6;
         margin: 50px;
         color: #333;
         background-color: #fff;
     }
+    header, section, footer {
+        margin-bottom: 40px;
+    }
     h1, h2, h3, h4, h5, h6 {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Merriweather', sans-serif;
         margin-top: 20px;
         margin-bottom: 10px;
         font-weight: 700;
@@ -44,7 +47,7 @@ def generate_html_with_css(markdown_content):
         margin-bottom: 20px;
     }
     a {
-        color: #007bff;
+        color: #3498db;
         text-decoration: none;
     }
     a:hover {
@@ -62,29 +65,43 @@ def generate_html_with_css(markdown_content):
     th {
         background-color: #f2f2f2;
     }
-    pre {
-        background-color: #f4f4f4;
+    pre, code {
+        background-color: #efefef;
         border: 1px solid #ddd;
         padding: 10px;
         overflow: auto;
     }
     code {
         font-family: 'Open Sans', monospace;
-        background-color: #f4f4f4;
         padding: 2px 4px;
         font-size: 90%;
         border-radius: 3px;
     }
+    footer {
+        font-size: 0.9em;
+        color: #777;
+    }
     </style>
     """
-
-    # Convert Markdown to HTML
-    html_content = markdown.markdown(markdown_content, extensions=[TableExtension()])
+    # Semantic HTML structure
+    html_structure = """
+    <header>
+        <h1>Autograder Report</h1>
+    </header>
+    <main>
+        {content}
+    </main>
+    <footer>
+        <p>Generated on: {date}</p>
+    </footer>
+    """.format(content=markdown.markdown(markdown_content, extensions=[TableExtension()]),
+               date=os.path.getmtime("autograder_report.html"))
 
     # Combine CSS and HTML content
-    styled_html = css_styles + html_content
+    styled_html = css_styles + html_structure
 
     return styled_html
+
 
 
 def main():
