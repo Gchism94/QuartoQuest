@@ -30,6 +30,8 @@ def generate_markdown_report(quality_reports, repo_structure_results, notebook_s
         report_md += f"- **Complexity**: {report.get('Complexity', 'N/A')}\n"
         report_md += f"- **Structure**: {report.get('Structure', 'N/A')}\n\n"
 
+    report_md += "- [PEP 8 Style Guide for Python Code](https://pep8.org/)\n"
+
 
     # Commit Analysis Results
     if commit_analysis_results:
@@ -37,6 +39,8 @@ def generate_markdown_report(quality_reports, repo_structure_results, notebook_s
         for key, value in commit_analysis_results.items():
             report_md += f"- **{key.replace('_', ' ').title()}**: {value}\n"
         report_md += "\n"
+
+    report_md += "- [Write Meaningful Commits](https://www.freecodecamp.org/news/git-best-practices-commits-and-code-reviews/)\n"
 
 
     # Improvement Plan
@@ -91,3 +95,8 @@ if __name__ == "__main__":
         sample_commit_analysis_results,
         improvement_plan
     )
+
+    # Define the path for saving the report within the 'docs' directory
+    report_file_path = os.path.join('.', 'docs', 'autograder_report.md')
+    save_markdown_report(markdown_report, report_file_path)
+    print(f"Report saved to {report_file_path}")

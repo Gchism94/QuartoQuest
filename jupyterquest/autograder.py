@@ -89,11 +89,11 @@ def generate_html_with_css(markdown_content):
 
 def main():
     repo_path = os.getenv('GITHUB_WORKSPACE', '.')
-    reports_dir = os.path.join(repo_path, "reports")  
+    reports_dir = os.path.join(repo_path, "docs")  
 
     # 1. Check Repository Structure
     required_directories = ['data', 'images']
-    allowed_files_patterns = ['README.md', '.gitignore', 'LICENSE', 'requirements.txt', '*.ipynb', '*.py', 'reports/*']
+    allowed_files_patterns = ['README.md', '.gitignore', 'LICENSE', 'requirements.txt', '*.ipynb', '*.py', 'docs/*']
     repo_structure_results = check_directory_structure(
         repo_path, required_directories, allowed_files_patterns
     )

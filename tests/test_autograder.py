@@ -22,7 +22,7 @@ class TestAutograder(unittest.TestCase):
 
         # Assuming the GITHUB_WORKSPACE environment variable would be set to '.'
         # Adjust the report path to reflect the direct saving in the 'reports' directory
-        expected_report_path = os.path.join('.', "reports", "autograder_report.html")
+        expected_report_path = os.path.join('.', "docs", "autograder_report.html")
         mock_open.assert_called_with(expected_report_path, 'w', encoding='utf-8')
         
         # Verify the HTML content generation call
