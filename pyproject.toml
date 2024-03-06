@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "jupyterquest"
-version = "0.3.0"  # Incrementing version to reflect new changes
+version = "0.4.0"  # Incrementing version to reflect new changes
 description = "A Python package for automating grading of Jupyter notebook files."
 readme = "README.md"
 authors = [{name = "Greg Chism", email = "gchism@arizona.edu"}]

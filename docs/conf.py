@@ -9,7 +9,7 @@
 project = 'jupyterquest'
 copyright = '2024, Greg Chism'
 author = 'Greg Chism'
-release = '0.3.0'
+release = '0.4.0'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
