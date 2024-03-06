@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.8', '3.9', '3.10'] 
+        python-version: ['3.8', '3.9', '3.10']
 
     steps:
       - uses: actions/checkout@v2
@@ -19,7 +19,22 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -e .
-          # If you have a requirements.txt specifically for tests or additional dependencies
-          # pip install -r requirements.txt
-      - name: Run tests with unittest
-        run: python -m unittest discover tests
+          # Install coverage package to generate coverage reports
+          pip install coverage codecov
+      - name: Run tests with coverage
+        run: |
+          # Use coverage run instead of python -m unittest discover to run your tests
+          coverage run -m unittest discover tests
+          # Generate a coverage report
+          coverage report
+          # Optionally, generate an XML report for Codecov
+          coverage xml
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          # Token is not required for public repos
+          # token: ${{ secrets.CODECOV_TOKEN }} 
+          files: ./coverage.xml
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: true  # Optional: specify if CI should fail if Codecov encounters errors
