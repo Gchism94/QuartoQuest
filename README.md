@@ -2,9 +2,10 @@
 
 | Category | Badges |
 | --- | --- |
+| Website | [![Netlify Status](https://api.netlify.com/api/v1/badges/602d0b5c-737a-4742-8e0b-8487cc3165aa/deploy-status)](https://app.netlify.com/sites/jupyterquest/deploys) |
 | Testing | [![GitHub Workflow Status](https://github.com/Gchism94/jupyterquest/actions/workflows/python-tests.yml/badge.svg)](https://github.com/Gchism94/jupyterquest/actions/workflows/autograder.yml) |
 | License | [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE) |
-| Version | [![Version](https://img.shields.io/badge/version-0.2.0-blue)](#) |
+| Version | [![Version](https://img.shields.io/badge/version-0.3.0-blue)](#) |
 
 
 ## Overview
