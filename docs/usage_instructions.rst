@@ -93,7 +93,7 @@ Configuring the Autograder Action
           - name: Install Dependencies
             run: |
               python -m pip install --upgrade pip
-              pip install git+https://github.com/Gchism94/jupyterquest.git
+              pip install jupyterquest
 
           # Run the autograder
           - name: Run Autograder
