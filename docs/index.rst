@@ -6,8 +6,6 @@
 Welcome to jupyterquest's documentation!
 ========================================
 
-.. attention:: This autograder is in development and the documentation is incomplete. Use with caution.
-
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
