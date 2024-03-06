@@ -11,3 +11,5 @@ __pycache__/
 test_security_checks_inactive.py
 test_dependency_checks_inactive.py
 venv/*
+coverage.xml
+/coverage
