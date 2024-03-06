@@ -1,0 +1,24 @@
+# Exclude all files in the tests directory
+recursive-exclude tests *
+
+# Exclude specific directories
+prune docs
+prune examples
+
+# Exclude specific file types globally
+global-exclude *.py[cod] __pycache__ *.so *.dylib .DS_Store
+
+# Exclude specific files or patterns
+exclude .gitignore
+exclude .editorconfig
+exclude .travis.yml
+exclude .env
+
+# Exclude build artifacts
+prune dist
+prune build
+prune *.egg-info
+
+# Exclude coverage reports
+coverage.xml
+/coverage
