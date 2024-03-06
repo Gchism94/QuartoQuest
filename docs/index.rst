@@ -6,20 +6,20 @@
 Welcome to jupyterquest's documentation!
 ========================================
 
+.. attention:: This autograder is in development and the documentation is incomplete. Use with caution.
+
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :caption: Contents:
 
    introduction
    installation_guide
    usage_instructions
-   advanced_features
-
 
 
 Indices and tables
 ==================
 
-* :ref:`genindex`
-* :ref:`modindex`
+.. * :ref:`genindex`
+.. * :ref:`modindex`
 * :ref:`search`

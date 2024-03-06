@@ -29,7 +29,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3b550bdb" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=dd48b981" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
@@ -42,6 +42,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'usage_instructions';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="example.html" />
     <link rel="prev" title="Installation" href="installation_guide.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -156,11 +157,11 @@
                     </li>
                 
 
-                <li class="nav-item">
-                  <a class="nav-link nav-external" href="https://github.com/Gchism94/jupyterquest">
-                    GitHub
-                  </a>
-                </li>
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="example.html">
+                        <no title>
+                      </a>
+                    </li>
                 
   </ul>
 </nav></div>
@@ -184,6 +185,22 @@
  </script>
         </div>
       
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Gchism94/jupyterquest" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
       
     </div>
     
@@ -253,11 +270,11 @@
                     </li>
                 
 
-                <li class="nav-item">
-                  <a class="nav-link nav-external" href="https://github.com/Gchism94/jupyterquest">
-                    GitHub
-                  </a>
-                </li>
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="example.html">
+                        <no title>
+                      </a>
+                    </li>
                 
   </ul>
 </nav></div>
@@ -265,6 +282,26 @@
       </div>
     
     
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Gchism94/jupyterquest" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
     
   </div>
   
@@ -329,6 +366,10 @@
   <section id="usage-instructions">
 <span id="id1"></span><h1>Usage Instructions<a class="headerlink" href="#usage-instructions" title="Link to this heading">#</a></h1>
 <p>The JupyterQuest Autograder is designed to automate the grading of coding assignments using GitHub Actions. This document provides step-by-step instructions on how to set up and use the autograder for your projects.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Find a working example of the autograder in the following <a class="reference external" href="https://github.com/Gchism94/autograder-test">GitHub repository</a> and <a class="reference external" href="https://github.com/Gchism94/autograder-test">Report hosted by GitHub Pages</a></p>
+</div>
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
 <p>Before setting up the autograder, ensure you have:</p>
@@ -349,7 +390,7 @@
 ├── data                        # Directory for datasets used in assignments
 ├── images                      # Directory for images used in notebooks or documentation
 ├── docs                        # Directory for project documentation and reports
-├── assignment.ipynb            # Targey Jupyter notebook (.ipynb files)
+├── assignment.ipynb            # Target Jupyter notebook (.ipynb file)
 ├── requirements.txt            # Python dependencies required for the notebooks
 ├── LICENSE                     # The license file (not required)
 └── README.md                   # The project readme with an overview of the repository
@@ -360,9 +401,9 @@
 <li><p>The <cite>.github/workflows/autograder.yml</cite> file contains the GitHub Actions workflow configuration for running the autograder.</p></li>
 <li><p>The <cite>data</cite> and <cite>images</cite> directories should contain any datasets and images referenced by your Jupyter notebooks, respectively.</p></li>
 <li><p>The <cite>docs</cite> directory is intended for any generated reports or additional documentation you wish to include.</p></li>
-<li><p>The <cite>notebooks</cite> directory should contain all Jupyter notebooks (.ipynb files) that will be graded.</p></li>
+<li><p>The <cite>assignment.ipynb</cite> Jupyter notebook (.ipynb file) that will be graded.</p></li>
 <li><p>The <cite>requirements.txt</cite> file specifies all Python packages required to run the notebooks successfully. This file is used by the autograder to install dependencies in its execution environment.</p></li>
-<li><p>The <cite>LICENSE</cite> and <cite>README.md</cite> files provide important information about the project’s license and an overview of the repository, respectively.</p></li>
+<li><p>The <cite>LICENSE</cite> and <cite>README.md</cite> files provide important information about the project’s license (not required) and an overview of the repository, respectively.</p></li>
 </ul>
 <p>By organizing your repository according to these guidelines, you ensure that the autograder can efficiently locate and process the necessary files for grading your Jupyter notebooks.</p>
 </section>
@@ -430,7 +471,7 @@
 </section>
 <section id="support">
 <h2>Support<a class="headerlink" href="#support" title="Link to this heading">#</a></h2>
-<p>If you encounter issues or have questions about setting up or using the autograder, please refer to the [GitHub repository](<a class="github reference external" href="https://github.com/Gchism94/jupyterquest">Gchism94/jupyterquest</a>) or submit an issue.</p>
+<p>If you encounter issues or have questions about setting up or using the autograder, please refer to the <span class="xref std std-ref">GitHub repository</span> or submit an issue.</p>
 </section>
 </section>
 
@@ -452,6 +493,15 @@
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Installation</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="example.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

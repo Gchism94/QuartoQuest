@@ -5,6 +5,8 @@ Usage Instructions
 
 The JupyterQuest Autograder is designed to automate the grading of coding assignments using GitHub Actions. This document provides step-by-step instructions on how to set up and use the autograder for your projects.
 
+.. seealso:: Find a working example of the autograder in the following `GitHub repository <https://github.com/Gchism94/autograder-test>`_ and `Report hosted by GitHub Pages <https://github.com/Gchism94/autograder-test>`_
+
 Prerequisites
 --------------
 
@@ -32,7 +34,7 @@ Below is an example structure of a well-organized GitHub repository:
     ├── data                        # Directory for datasets used in assignments
     ├── images                      # Directory for images used in notebooks or documentation
     ├── docs                        # Directory for project documentation and reports
-    ├── assignment.ipynb            # Targey Jupyter notebook (.ipynb files)
+    ├── assignment.ipynb            # Target Jupyter notebook (.ipynb file)
     ├── requirements.txt            # Python dependencies required for the notebooks
     ├── LICENSE                     # The license file (not required)
     └── README.md                   # The project readme with an overview of the repository
@@ -42,9 +44,9 @@ Ensure you adjust the repository structure according to the specific needs of yo
 - The `.github/workflows/autograder.yml` file contains the GitHub Actions workflow configuration for running the autograder.
 - The `data` and `images` directories should contain any datasets and images referenced by your Jupyter notebooks, respectively.
 - The `docs` directory is intended for any generated reports or additional documentation you wish to include.
-- The `notebooks` directory should contain all Jupyter notebooks (.ipynb files) that will be graded.
+- The `assignment.ipynb` Jupyter notebook (.ipynb file) that will be graded.
 - The `requirements.txt` file specifies all Python packages required to run the notebooks successfully. This file is used by the autograder to install dependencies in its execution environment.
-- The `LICENSE` and `README.md` files provide important information about the project's license and an overview of the repository, respectively.
+- The `LICENSE` and `README.md` files provide important information about the project's license (not required) and an overview of the repository, respectively.
 
 By organizing your repository according to these guidelines, you ensure that the autograder can efficiently locate and process the necessary files for grading your Jupyter notebooks.
 
@@ -117,5 +119,5 @@ For more advanced usage, including custom grading scripts or additional dependen
 Support
 -------
 
-If you encounter issues or have questions about setting up or using the autograder, please refer to the [GitHub repository](https://github.com/Gchism94/jupyterquest) or submit an issue.
+If you encounter issues or have questions about setting up or using the autograder, please refer to the :ref:`GitHub repository <https://github.com/Gchism94/jupyterquest>` or submit an issue.
 

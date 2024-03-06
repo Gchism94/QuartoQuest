@@ -26,7 +26,7 @@ GitHub Actions Setup
 
 2. **Create Workflow**: Within the `.github/workflows` directory, create a new YAML file for the autograder workflow, such as `autograder.yml`.
 
-3. **Workflow Content**: Copy the contents from the [Usage Instructions](link-to-usage-instructions) guide into your new `autograder.yml` file. Customize the workflow according to your specific grading requirements and repository structure.
+3. **Workflow Content**: Copy the contents from the :ref:`Usage Instructions <usage_instructions>` guide into your new `autograder.yml` file. Customize the workflow according to your specific grading requirements and repository structure.
 
 4. **Commit Changes**: Commit the new `autograder.yml` file to your repository. This action enables the autograder workflow within your GitHub Actions.
 
@@ -38,4 +38,4 @@ The autograder installation process will automatically handle the installation o
 Support
 -------
 
-For assistance with configuring your repository or troubleshooting the autograder workflow, please refer to the [FAQ](link-to-faq) or [submit an issue](link-to-github-issues) on the GitHub repository page.
+For assistance with configuring your repository or troubleshooting the autograder workflow, please `submit an issue <https://github.com/Gchism94/jupyterquest/issues>`_ on the GitHub repository page.
