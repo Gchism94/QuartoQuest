@@ -5,7 +5,7 @@ Usage Instructions
 
 The JupyterQuest Autograder is designed to automate the grading of coding assignments using GitHub Actions. This document provides step-by-step instructions on how to set up and use the autograder for your projects.
 
-.. seealso:: Find a working example of the autograder in the following `GitHub repository <https://github.com/Gchism94/autograder-test>`_ and `Report hosted by GitHub Pages <https://github.com/Gchism94/autograder-test>`_
+.. seealso:: Find a working example of the autograder in the following `GitHub repository <https://github.com/Gchism94/autograder-test>`_ and `Report hosted by GitHub Pages <https://gchism94.github.io/autograder-test/>`_
 
 Prerequisites
 --------------

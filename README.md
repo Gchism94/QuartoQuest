@@ -3,7 +3,7 @@
 | Category | Badges |
 | --- | --- |
 | Website | [![Netlify Status](https://api.netlify.com/api/v1/badges/602d0b5c-737a-4742-8e0b-8487cc3165aa/deploy-status)](https://app.netlify.com/sites/jupyterquest/deploys) |
-| Testing | [![GitHub Workflow test status badge](https://img.shields.io/github/actions/workflow/status/Gchism94/jupyterquest/python-tests.yml?logo=github&logoColor=white)](https://github.com/Gchism94/jupyterquest/actions/workflows/autograder.yml) |
+| Testing | [![GitHub Workflow test status badge](https://img.shields.io/github/actions/workflow/status/Gchism94/jupyterquest/python-tests.yml?logo=github&logoColor=white)](https://github.com/Gchism94/jupyterquest/actions/workflows/autograder.yml) <br> [![Codecov test coverage percentage badge](https://img.shields.io/codecov/c/github/Gchism94/jupyterquest?logo=codecov&logoColor=white)](https://codecov.io/gh/Gchism94/jupyterquest)|
 | License | [![License badge](https://img.shields.io/badge/License-MIT-yellow?logo=opensourceinitiative&logoColor=white)](https://github.com/Gchism94/jupyterquest/blob/main/LICENSE)
 | Version | [![PyPI version badge](https://img.shields.io/pypi/v/jupyterquest?logo=python&logoColor=white&color=orange)](https://test.pypi.org/project/jupyterquest/)
  |
