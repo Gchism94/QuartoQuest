@@ -4,11 +4,6 @@ authors:
 - family-names: "Chism"
   given-names: "Greg"
   orcid: "https://orcid.org/0000-0002-5478-2445"
-- family-names: "Faron"
-  given-names: "Wiley"
-- family-names: "Dornhaus"
-  given-names: "Anna"
-  orcid: "https://orcid.org/0000-0002-9809-7263"
 title: "jupyterquest"
 doi: 10.5281/zenodo.10784349
 version: v0.4.0
